@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
+</head>
+<body>
+
+
+    <!-- intro -->
+    <section id="intro">
+        <div class="container">
+            <h1 class="text-dark pt-5">Mi nombre es <span class="fw-bold">Luciano Candotti,</span><br>soy Diseñador Gráfico—Audiovisual con 15+ años de experiencia.</h1>
+            <h2 class="py-3 fw-light">Me especializo en <span class="fw-semibold">Branding y Desarrollo Front-End,</span> destacando este último como un diferenciador en el mercado por mi visión estética.</h2>
+            <h3 class="pb-4"><span class="fw-light text-black-50">Si funciona en blanco y negro = funciona como sea!</span><h3>
+        </div>
+    </section>
+    
+    <!-- contenedor de proyecto abierto -->
+    <a href="javascript:getClose()"><div id="project"></div></a>
+
+    <!-- galería de proyectos -->
+    <section id="grilla"></section><div id="output"></div></section>
+
+   <script>
+    /* función autoinvocada, sin nombre por eso se invoca al final con () */
+
+    (function () {
+    fetch('post.json')
+    .then((res) => res.json())
+    .then((data) => {
+      // Inicializar el contenedor principal
+      const container = document.createElement('div');
+      container.className = 'container py-4';
+      const row = document.createElement('div');
+      row.className = 'row';
+      container.appendChild(row);
+      document.getElementById('output').appendChild(container);
+      
+      // Configurar el Intersection Observer
+      const options = {
+        root: null, // viewport
+        rootMargin: '200px', // carga un poco antes de que sea visible (precarga)
+        threshold: 0.1 // cuando al menos el 10% del elemento sea visible
+      };
+      
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            const postIndex = parseInt(element.dataset.index);
+            
+            // Renderizar el elemento real
+            const post = data[postIndex];
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'col-lg-4 col-md-6 pb-4';
+            cardDiv.innerHTML = `
+              <div class="card bg-light px-3 shadow-lg rounded-0">
+                <h3 class="fs-4 text-dark pt-3 pb-2">${post.title}</h3>
+                <div class="overflow-hidden">
+                  <a id="${post.id}" href="javascript:getProject('${post.id}')">
+                    <img class="img-fluid rounded-0 hover-zoom" style="transition: transform 0.5s ease;" src="./img/${post.id}/1.jpg">
+                  </a>
+                </div>
+                <p class="pt-3 text-muted">${post.intro}</p>
+              </div>
+            `;
+            
+            // Reemplazar el placeholder con el contenido real
+            element.parentNode.replaceChild(cardDiv, element);
+            
+            // Dejar de observar este elemento
+            observer.unobserve(entry.target);
+          }
+        });
+      }, options);
+      
+      // Crear placeholders para todos los posts y observarlos
+      data.forEach((post, index) => {
+        const placeholderDiv = document.createElement('div');
+        placeholderDiv.className = 'col-lg-4 col-md-6 pb-4';
+        placeholderDiv.style.height = '400px'; // altura aproximada para mantener el layout
+        placeholderDiv.dataset.index = index;
+        
+        // Agregar el placeholder al DOM
+        row.appendChild(placeholderDiv);
+        
+        // Empezar a observar
+        observer.observe(placeholderDiv);
+      });
+    })
+    .catch(error => {
+      console.error('Error cargando los datos:', error);
+      document.getElementById('output').innerHTML = '<div class="alert alert-danger">Error al cargar el contenido</div>';
+    });
+    })();
+
+    /*
+    Este código tiene las siguientes optimizaciones:
+
+        - Carga perezosa con Intersection Observer: Solo carga el contenido cuando está a punto de entrar en la pantalla del usuario.
+        
+        - Placeholders iniciales: Crea elementos vacíos que mantienen el diseño de la página mientras se cargan los elementos reales.
+        
+        - Margen de precarga: Con rootMargin: '200px' carga elementos un poco antes de que sean visibles, creando una experiencia más fluida.
+
+        - Manejo de errores: Añadí un bloque catch para mostrar un mensaje en caso de error al cargar el JSON.
+        Desvinculación automática: Cada elemento observado se desvincula del observer después de cargarse para mejorar el rendimiento.
+
+    Esta implementación reducirá significativamente el tiempo de carga inicial y mejorará el rendimiento, especialmente si tienes muchos elementos en tu JSON.
+    */
+
+
+    // Cargamos el proyecto arriba de la grilla
+    function getProject(id) {
+        fetch('post.json')
+        .then((res) => res.json())
+        .then((data) => {
+            let imgInsert = '';
+            // Encontramos el proyecto con id al que hicimos click
+            const project = data.find(project => project.id === id);
+            
+            //console.log(project); // Imprime el proyecto encontrado
+            
+            // Verificamos que encontramos el proyecto
+            if (project) {
+                // Cargamos todas las url/img en un string
+                for(let img = 2; img <= project.cant; img++) {
+                imgInsert += `<img class="img-fluid pb-4" src="./img/${project.id}/${img}.jpg">`;
+                }
+                
+                // Construimos el contenedor con todas las imágenes
+                let grilla = `
+                <div class="container pt-5">
+                    <h1 class="pb-4 text-dark">${project.title}</h1>
+                    <h2 class="pb-3 text-dark fw-light">${project.descript}</h2>
+                    <p class="pb-4"><a href="https://${project.link}/" target="_blank">${project.link}</a> | ${project.date}</p>
+                    <div class="row">
+                    ${imgInsert}
+                    </div>
+                </div>
+                `;
+
+                
+                document.getElementById('project').innerHTML = grilla;
+                location.href = "#project";
+                //document.body.style.backgroundColor = project.color;
+                //window.scroll(0, 250);
+            } else {
+                console.error(`No se encontró un proyecto con id '${id}'`);
+            }
+        })
+        .catch(error => {
+        console.error("Error al cargar los datos:", error);
+        });
+    };
+
+    function getClose(){
+        document.getElementById('project').innerHTML = '';
+        //document.body.scrollTop = document.documentElement.scrollTop = 0;
+        location.href = "#project";
+        //document.body.style.backgroundColor = '#0f0f0f';
+    }
+
+   </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

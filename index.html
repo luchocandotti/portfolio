@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
+</head>
+<body>
+    <!-- intro -->
+    <section id="intro">
+        <div class="container">
+            <h1 class="text-dark pt-5">Mi nombre es <span class="fw-bold">Luciano Candotti,</span><br>soy Diseñador Gráfico—Audiovisual con 15+ años de experiencia.</h1>
+            <h2 class="py-3 fw-light">Me especializo en <span class="fw-semibold">Branding y Desarrollo Front-End,</span> y destaco este último como fortaleza, pues implemento en el código mi habilidad estética.</h2>
+            <h3 class="pb-4"><span class="fw-light text-black-50">Si funciona en blanco y negro = funciona siempre.</span><h3>
+        </div>
+    </section>
+    
+    <!-- contenedor de proyecto abierto -->
+    <section id="project"></section>
+
+    <!-- galería de proyectos -->
+    <section id="output"></section>
+
+   <script>
+    
+    // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS --------------------------------------------- //
+
+    /* función autoinvocada, sin nombre por eso se invoca al final con () */
+
+    (function () { 
+        fetch('post.json')
+        .then((res) => res.json())
+        .then((data) => {
+            // Mostramos algún indicador de carga
+            document.getElementById('output').innerHTML = '<div class="text-center p-5"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
+            
+            // Creamos un array para almacenar todas las promesas de carga de imágenes
+            const imagePromises = [];
+
+            let output = '';
+
+            data.forEach(function(post){
+                /* Construímos los divs con la info + las imgs
+
+                Dentro del div usamos col-lg-4 separa la grilla en 3 en pantalla grande
+                col-md-6 separa la grilla en 3 en pantalla mediana, y en pequeño se apila todo a 1 columna
+                img-fluid es para que sea flexbox  */
+                const imgPath = `./img/${post.id}/1.jpg`;
+
+                output += `
+                    <div class="col-lg-4 col-md-6 pb-4">
+                        <div class="card bg-light px-3 shadow-lg rounded-0">
+                            <h3 class="fs-4 text-dark pt-3 pb-2">${post.title}</h3>
+                            <div class="overflow-hidden">
+                                <a id="${post.id}" href="javascript:getProject('${post.id}')">
+                                   <img class="img-fluid rounded-0 hover-zoom" style="transition: transform 0.5s ease;" src="./img/${post.id}/1.jpg">
+                                </a>
+                            </div>
+                            <p class="pt-3 text-muted">${post.intro}</p>
+                        </div>
+                    </div>
+                `;
+
+                // Creamos una promesa para cada imagen
+                const imagePromise = new Promise((resolve, reject) => {
+                    const tempImg = new Image();
+                    tempImg.onload = () => resolve();
+                    tempImg.onerror = () => reject();
+                    tempImg.src = imgPath;
+                });
+                
+                imagePromises.push(imagePromise);
+            });
+
+            let galeria =`
+                <div class="container py-4">
+                    <div class="row">
+                        ${output}
+                    </div>
+                </div>
+            `;
+
+            Promise.all(imagePromises)
+                .then(() => {
+                // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
+                document.getElementById('output').innerHTML = galeria;
+                console.log('se cargó todo en la galeria');
+                })
+                .catch(() => {
+                // En caso de error en alguna imagen, mostramos el contenido de todas formas
+                document.getElementById('output').innerHTML = galeria;
+                });
+        })
+    })();
+
+
+    // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------- //
+
+    function getProject(id) {
+        fetch('post.json')
+        .then((res) => res.json())
+        .then((data) => {
+            // Encontramos el proyecto con id al que hicimos click
+            const project = data.find(project => project.id === id);
+
+            // Verificamos que encontramos el proyecto
+            if (project) {
+                // Posicionamos el scroll
+                location.href = "#project";
+                // Mostramos algún indicador de carga
+                document.getElementById('project').innerHTML = '<div class="text-center p-5"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
+            
+                // Creamos un array para almacenar todas las promesas de carga de imágenes
+                const imagePromises = [];
+                let imgInsert = '';
+            
+            // Cargamos todas las url/img en un string y creamos promesas para cada imagen
+            for(let img = 2; img <= project.cant; img++) {
+                const imgPath = `./img/${project.id}/${img}.jpg`;
+                imgInsert += `<img class="img-fluid pb-4" src="${imgPath}">`;
+                
+                // Creamos una promesa para cada imagen
+                const imagePromise = new Promise((resolve, reject) => {
+                    const tempImg = new Image();
+                    tempImg.onload = () => resolve();
+                    tempImg.onerror = () => reject();
+                    tempImg.src = imgPath;
+                });
+                
+                imagePromises.push(imagePromise);
+            }
+  
+            // Construimos el contenedor con todas las imágenes
+            let proyecto = `
+                <div class="container pt-5">
+                <h1 class="pb-4 text-dark">${project.title}</h1>
+                <h2 class="pb-3 text-dark fw-light">${project.descript}</h2>
+                <div class="row mb-4">
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                    <p>${project.intro}</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-end">
+                    <p>${project.date}<br><a id="linkIcon" href="https://${project.link}/" target="_blank"><i class="bi bi-link-45deg align-text-middle fs-5"></i> ${project.link}</a></p>
+                    </div>
+                </div>
+                <a id="projector" href="javascript:getClose()">
+                    <div class="row">
+                    ${imgInsert}
+                    </div>
+                </a>
+                </div>
+            `;
+  
+            // Esperamos a que todas las imágenes se carguen antes de mostrar el contenido
+            Promise.all(imagePromises)
+                .then(() => {
+                // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
+                document.getElementById('project').innerHTML = proyecto;
+                location.href = "#project";
+                console.log(`se cargó todo en el proyecto: ${project.title}`);
+                    // Evaluamos si el proyecto posee link
+                    if (project.link == ""){
+                        document.getElementById('linkIcon').style.display = 'none';
+                    } else {
+                        document.getElementById('linkIcon').style.display = '';
+                    }
+                })
+                .catch(() => {
+                // En caso de error en alguna imagen, mostramos el contenido de todas formas
+                document.getElementById('project').innerHTML = proyecto;
+                });
+            }
+        })
+        .catch(error => {
+        console.error("Error al cargar los datos:", error);
+        });
+    };
+
+    function getClose(){
+        document.getElementById('project').innerHTML = '';
+        location.href = "#project";
+    }
+
+   </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>

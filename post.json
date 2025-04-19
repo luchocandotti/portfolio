@@ -1,0 +1,173 @@
+[
+  {
+    "id": "17",
+    "title": "Revolve",
+    "date": "Santa Fe — Santa Fe [2025]",
+    "intro": "<span class='fw-semibold'>Empresa de ciberseguridad:</span><br>Diseño de marca + manual de aplicación + web.",
+    "descript": "En nuestro imaginaro colectivo, la idea de ir hacia arriba siempre es algo positivo. Sea morfología humana,cuestión de números de mercado o religiosa-metafísicamente.<br><br>El acento ^ es una forma poco obvia y minimalista de utilizar esta idea.",
+    "cant": "5",
+    "related": "4, 8",
+    "link": "instagr.am/xrevolve.online"
+  },
+  {
+    "id": "16",
+    "title": "Foreman™",
+    "date": "Rosario — Santa Fe [2025]",
+    "intro": "<span class='fw-semibold'>Estudio de Marketing:</span><br>Diseño de marca",
+    "descript": "En un mundo donde la ciberseguridad es más importante que nunca, FOREMAN ayuda a proteger los activos digitales y mantener los sistemas seguros.",
+    "cant": "9",
+    "related": "4, 8",
+    "link": "foreman.com.ar"
+  },
+  {
+    "id": "15",
+    "title": "Grupo Sandoval",
+    "date": "Santa Fe — Santa Fe [2025]",
+    "intro": "<span class='fw-semibold'>Empresa de tipo holding:</span><br>Diseño de marca + manual de aplicación.",
+    "descript": "La empresa apunta en un futuro a tener sub-empresas que se dediquen de lleno a rubros específicos. Por eso la elección de una marca paraguas, es decir: una marca que agrupa otras marcas.<br><br>La geometría de los poliedros 3D, no solo grafica la unión de vectores en una sola masa, sino que permite matemáticamente una escalabilidad virtualmente infinita.",
+    "cant": "11",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "14",
+    "title": "Forja",
+    "date": "Posadas — Misiones [2025]",
+    "intro": "<span class='fw-semibold'>Indumentaria industrial:</span><br>Diseño de marca.",
+    "descript": "Marca de indumentaria de alta resistencia, destinada tanto a trabajadores del campo y la industria, como a estudiantes de escuelas técnicas.",
+    "cant": "5",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "13",
+    "title": "Javier Cucina",
+    "date": "Posadas — Misiones [2023]",
+    "intro": "<span class='fw-semibold'>Productor de panificados:</span><br>Diseño de marca + producción audiovisual para productos.",
+    "descript": "Emprendimiento de panificados caseros. Su mayor movimiento en ventas es durante fechas especiales como feriados o festividades.",
+    "cant": "10",
+    "related": "4, 8",
+    "link": "instagr.am/javiercucina"
+  },
+  {
+    "id": "12",
+    "title": "Club Alemán de Patín",
+    "date": "Posadas — Misiones [2023]",
+    "intro": "<span class='fw-semibold'>Club de patín artístico de competencia:</span><br>Retoque de marca + manual de aplicación.",
+    "descript": "Se redibujó el reconocido águila alemán, se reacomodó el denominador de la marca para que acompañe al escudo. En cuanto a la tipografía del logo, se utilizó Fraktur: tipografía usada en Alemania para la mayor parte de sus libros editados entre los siglos XVI y XIX.",
+    "cant": "5",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "11",
+    "title": "Testa",
+    "date": "Posadas — Misiones [2022]",
+    "intro": "<span class='fw-semibold'>Asesor de negocios para emprendedores:</span><br>Diseño de marca.",
+    "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
+    "cant": "4",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "10",
+    "title": "Tupperfect",
+    "date": "Posadas — Misiones [2022]",
+    "intro": "<span class='fw-semibold'>Vendedora de Tupperware:</span><br>Naming y producción foto-producto para Instagram.",
+    "descript": "Es proyectual: viene del diseño y se pone en diálogo con el arte para ponerlo en exposición.",
+    "cant": "11",
+    "related": "4, 8",
+    "link": "instagr.am/tupperfect"
+  },
+  {
+    "id": "9",
+    "title": "Jes",
+    "date": "Puerto Rico — Misiones [2023]",
+    "intro": "<span class='fw-semibold'>Fábrica de indumentaria y accesorios textiles:</span><br>Rediseño.",
+    "descript": "Es proyectual: viene del diseño y se pone en diálogo con el arte para ponerlo en exposición.",
+    "cant": "8",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "8",
+    "title": "Tensor",
+    "date": "Posadas — Misiones [2021]",
+    "intro": "<span class='fw-semibold'>Galería de arte contemporáneo & tienda:</span><br>Marca + sistema gráfico + marca tienda + audiovisual.",
+    "descript": "Es proyectual: viene del diseño y se pone en diálogo con el arte para ponerlo en exposición.",
+    "cant": "9",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "7",
+    "title": "Peta SRL",
+    "date": "Puerto Rico — Misiones [2018]",
+    "intro": "<span class='fw-semibold'>Estación de servicio con franquicia Shell:</span><br>Marca y sistema gráfico simple.",
+    "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
+    "cant": "9",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "6",
+    "title": "Satoris DJ's",
+    "date": "Posadas — Misiones [2021]",
+    "intro": "<span class='fw-semibold'>Marca paraguas:</span><br>Símbolo base + subsímbolos @l_satoris y @r_satoris.",
+    "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
+    "cant": "4",
+    "related": "4, 8",
+    "link": "instagr.am/__satoris__"
+  },
+  {
+    "id": "5",
+    "title": "Valentina",
+    "date": "Posadas — Misiones [2022]",
+    "intro": "<span class='fw-semibold'>Entrenadora física online:</span><br>Logotipo + símbolo + videos para YouTube.",
+    "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
+    "cant": "4",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "4",
+    "title": "Paradero",
+    "date": "Puerto Rico — Misiones [2022]",
+    "intro": "<span class='fw-semibold'>Sandwichería artesanal no convencional, empaquetada al vacío para llevar:</span><br>Lettering + logotipo.",
+    "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
+    "cant": "10",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "3",
+    "title": "Seewald-I",
+    "date": "Puerto Rico — Misiones [2014]",
+    "intro": "<span class='fw-semibold'>Programador de sistemas web:</span><br>Naming y logotipo + símbolo.",
+    "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
+    "cant": "4",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "2",
+    "title": "McDonald",
+    "date": "Puerto Rico — Misiones [2019]",
+    "intro": "<span class='fw-semibold'>Mayorista de repuestos para motos:</span><br>Rediseño de marca.",
+    "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
+    "cant": "10",
+    "color": "#540000",
+    "related": "4, 8",
+    "link": ""
+  },
+  {
+    "id": "1",
+    "title": "Logofolio 2012/2023",
+    "date": "Posadas — Misiones",
+    "intro": "Un vistazo rápido a las marcas que he realizado en los últimos años.",
+    "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
+    "cant": "8",
+    "related": "4, 8",
+    "link": ""
+  }
+]
