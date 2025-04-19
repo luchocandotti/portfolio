@@ -28,6 +28,9 @@
     <section id="output"></section>
 
    <script>
+
+    window.scrollBy(0, 1);
+    window.scrollBy(0, -1);
     
     // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS --------------------------------------------- //
 
@@ -90,7 +93,6 @@
                 .then(() => {
                 // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
                 document.getElementById('output').innerHTML = galeria;
-                setInterval();
                 console.log('se cargó todo en la galeria');
                 })
                 .catch(() => {
@@ -165,8 +167,8 @@
                 document.getElementById('project').innerHTML = proyecto;
                 location.href = "#project";
 
-                tecla=1;
-                intervalo();
+                // tecla=1;
+                // document.body.style.backgroundColor = "#FFFFFF";
 
                 console.log(`se cargó todo en el proyecto: ${project.title}`);
                     // Evaluamos si el proyecto posee link
@@ -179,8 +181,8 @@
                 .catch(() => {
                 // En caso de error en alguna imagen, mostramos el contenido de todas formas
                 document.getElementById('project').innerHTML = proyecto;
-                tecla=1;
-                intervalo();
+                // tecla=1;
+                // document.body.style.backgroundColor = "#FFFFFF";
                 });
             }
         })
@@ -192,14 +194,15 @@
     function getClose(){
         document.getElementById('project').innerHTML = '';
         location.href = "#project";
-        tecla=0;
-        intervalo();
+        // tecla=0;
+        // intervalo();
     }
 
     // Cambiar el color del fondo cada 3 segundos
+    /*
     const colores = [
     "#FF5733", "#33FF57", "#3357FF", "#F39C12", "#9B59B6",
-    "#1ABC9C", "#E74C3C", "#2ECC71", "#34495E", "#FFFFFF"
+    "#1ABC9C", "#E74C3C", "#2ECC71", "#FFFFFF"
     ];
 
     let indice = 0;
@@ -212,9 +215,10 @@
       } else {
         document.body.style.backgroundColor = "#FFFFFF";
       }
-    }, 3000);
+    }, 8000);
 
     intervalo();
+    */
 
    </script>
 
