@@ -90,6 +90,7 @@
                 .then(() => {
                 // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
                 document.getElementById('output').innerHTML = galeria;
+                setInterval();
                 console.log('se cargó todo en la galeria');
                 })
                 .catch(() => {
@@ -163,6 +164,10 @@
                 // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
                 document.getElementById('project').innerHTML = proyecto;
                 location.href = "#project";
+
+                tecla=1;
+                intervalo();
+
                 console.log(`se cargó todo en el proyecto: ${project.title}`);
                     // Evaluamos si el proyecto posee link
                     if (project.link == ""){
@@ -174,6 +179,8 @@
                 .catch(() => {
                 // En caso de error en alguna imagen, mostramos el contenido de todas formas
                 document.getElementById('project').innerHTML = proyecto;
+                tecla=1;
+                intervalo();
                 });
             }
         })
@@ -185,7 +192,29 @@
     function getClose(){
         document.getElementById('project').innerHTML = '';
         location.href = "#project";
+        tecla=0;
+        intervalo();
     }
+
+    // Cambiar el color del fondo cada 3 segundos
+    const colores = [
+    "#FF5733", "#33FF57", "#3357FF", "#F39C12", "#9B59B6",
+    "#1ABC9C", "#E74C3C", "#2ECC71", "#34495E", "#FFFFFF"
+    ];
+
+    let indice = 0;
+    let tecla = 0;
+
+    const intervalo = setInterval(() => {
+      if (tecla===0){
+        document.body.style.backgroundColor = colores[indice];
+        indice = (indice + 1) % colores.length;
+      } else {
+        document.body.style.backgroundColor = "#FFFFFF";
+      }
+    }, 3000);
+
+    intervalo();
 
    </script>
 
