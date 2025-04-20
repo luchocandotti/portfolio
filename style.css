@@ -33,12 +33,26 @@ p{
     font-weight: 300;
 }
 
+#tabla{
+    font-weight: 300;
+}
+
 .hover-zoom:hover {
     transform: scale(1.15);
 }
 
 #projector:hover{
     cursor: url('./img/cursor.png') 0 0, auto;
+}
+
+#toggle:hover, #skillsToggle:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.form-check-input:checked {
+  background-color: #000 !important;
+  border-color: #000 !important;
 }
 
 
