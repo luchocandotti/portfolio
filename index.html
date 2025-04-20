@@ -16,8 +16,17 @@
     <section id="intro">
         <div class="container">
             <h1 class="text-dark pt-5">Mi nombre es <span class="fw-bold">Luciano Candotti,</span><br>soy Diseñador Gráfico—Audiovisual con 15+ años de experiencia.</h1>
-            <h2 class="py-3 fw-light">Me especializo en <span class="fw-semibold">Branding y Desarrollo Front-End,</span> y destaco este último como fortaleza, pues implemento en el código mi habilidad estética.</h2>
-            <h3 class="pb-4"><span class="fw-light text-black-50">Si funciona en blanco y negro = funciona siempre.</span><h3>
+            <h2 class="py-3 fw-light">Me especializo en <span class="fw-semibold">Branding y Desarrollo Front-End,</span> este último como fortaleza, pues implemento en código mi habilidad estética.</h2>
+            <p>click para jugar <i class="bi bi-arrow-down align-text-middle fs-6"></i></p><a id="color" href="#"><h3 class="pb-4"><span class="fw-light">Si funciona en blanco y negro = funciona siempre.</span><h3></a>
+            <div class="row mb-4">
+                <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
+                    <p>Mi habilidad predominante es la <span class="fw-semibold">claridad con la que abordo problemas complejos a través de soluciones simples</span> [a primera vista]. Esto respaldado por un control estético que no sólo vuelve a todo más atractivo, sino que ayuda en la <span class="fw-semibold">interacción [UI-UX]</span> con el soporte y en la asimilación de la información [Conversión].</p>
+                </div>
+                <div class="col-12 col-md-6 text-md-0 h6 lh-base">
+                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plain]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es poco.</p>
+                </div>
+            </div>
+            
         </div>
     </section>
     
@@ -166,9 +175,8 @@
                 // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
                 document.getElementById('project').innerHTML = proyecto;
                 location.href = "#project";
-
-                // tecla=1;
-                // document.body.style.backgroundColor = "#FFFFFF";
+                detenerIntervalo();
+                activo = false;
 
                 console.log(`se cargó todo en el proyecto: ${project.title}`);
                     // Evaluamos si el proyecto posee link
@@ -181,8 +189,8 @@
                 .catch(() => {
                 // En caso de error en alguna imagen, mostramos el contenido de todas formas
                 document.getElementById('project').innerHTML = proyecto;
-                // tecla=1;
-                // document.body.style.backgroundColor = "#FFFFFF";
+                detenerIntervalo();
+                activo = false;
                 });
             }
         })
@@ -194,32 +202,46 @@
     function getClose(){
         document.getElementById('project').innerHTML = '';
         location.href = "#project";
-        // tecla=0;
-        // intervalo();
     }
 
-    // Cambiar el color del fondo cada 3 segundos
-    /*
+    // Cambiar el color del fondo
     const colores = [
     "#FF5733", "#33FF57", "#3357FF", "#F39C12", "#9B59B6",
-    "#1ABC9C", "#E74C3C", "#2ECC71", "#FFFFFF"
+    "#1ABC9C", "#E74C3C", "#2ECC71"
     ];
 
     let indice = 0;
-    let tecla = 0;
+    let intervaloID = null; // para guardar el ID del setInterval
+    let activo = false; // esto controla si está encendido o apagado
 
-    const intervalo = setInterval(() => {
-      if (tecla===0){
-        document.body.style.backgroundColor = colores[indice];
-        indice = (indice + 1) % colores.length;
-      } else {
+    function iniciarIntervalo() {
+        if (intervaloID === null) { // prevenir múltiples intervalos superpuestos
+            // Cambiar color inmediatamente
+            document.body.style.backgroundColor = colores[indice];
+            indice = (indice + 1) % colores.length;
+            // Después arrancar el intervalo
+            intervaloID = setInterval(() => {
+            document.body.style.backgroundColor = colores[indice];
+            indice = (indice + 1) % colores.length;
+            }, 3000);
+        }
+    }
+
+    function detenerIntervalo() {
+        clearInterval(intervaloID);
+        intervaloID = null; // reiniciar
         document.body.style.backgroundColor = "#FFFFFF";
-      }
-    }, 8000);
+    }
 
-    intervalo();
-    */
-
+    document.getElementById('color').addEventListener("click", () => {
+        if (!activo) {
+            iniciarIntervalo();
+        } else {
+            detenerIntervalo();
+        }
+        activo = !activo; // alterna entre true/false
+    });
+    
    </script>
 
 
