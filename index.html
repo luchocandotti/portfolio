@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-12 col-md-6 text-md-0 h6 lh-base">
                     <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es corto.</p>
-                    <!-- <p class="fw-semibold"><i class="bi bi-book fs-6 pe-2" style="position: relative; top: 0.2px;"></i><a data-bs-toggle="collapse" href="#skills" role="button" aria-expanded="false" aria-controls="skills">habilidades técnicas</a> -->
+
                         <div class="form-check form-switch me-2">
                             <input class="form-check-input" type="checkbox" id="skillsToggle" style="position: relative; top: -0.1px;" data-bs-toggle="collapse" data-bs-target="#skills">
                             <label id="toggle" class="form-check-label" for="skillsToggle">Habilidades técnicas</label>
@@ -325,18 +325,17 @@
         activo = !activo; // alterna entre true/false
     });
 
-    let about = false;
+    // MOVER SCROLL SEGÚN TOGGLE EN SKILLS----------------------------- //
+    document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("skillsToggle");
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const skillsCollapse = document.getElementById('skills');
-        
-        skillsCollapse.addEventListener('shown.bs.collapse', function() {
-            if (!about){
-                window.location.href = "#about";
-                about = true;
+        toggle.addEventListener("change", function () {
+            if (toggle.checked) {
+            console.log("Toggle activado");
+            window.location.href = "#about";
             } else {
-                window.location.href = "#";
-                about = false;
+            console.log("Toggle desactivado");
+            window.location.href = "#";
             }
         });
     });
