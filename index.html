@@ -12,7 +12,7 @@
     <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
 </head>
 <body>
-    <!-- intro -->
+    <!-- intro ------------------------------------------------------------------------------------------------------------ -->
     <section id="intro">
         <div class="container">
             <h1 class="text-dark pt-5">Mi nombre es <span class="fw-bold">Luciano Candotti,</span><br>soy Diseñador Gráfico—Audiovisual con 15+ años de experiencia.</h1>
@@ -22,13 +22,13 @@
             <!-- <p>click para jugar <i class="bi bi-arrow-down align-text-middle fs-6"></i></p> -->
             <a id="color" href="#"><h3 class="pb-4 fw-light">
             <i class="bi bi-arrow-repeat fs-4 pe-2" style="position: relative; top: -3px;"></i>Si funciona en blanco y negro = funciona siempre.<h3></a>
-
-            <section id="about" class="row mb-3">
+    <!-- about ------------------------------------------------------------------------------------------------------------- -->
+            <section class="row mb-3">
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
                     <p>Mi habilidad primaria es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve a todo más atractivo, sino que ayuda en la <span class="fw-semibold">interacción [UI-UX]</span> con el programa y en la asimilación de la información [Conversión].</p>
                 </div>
-                <div class="col-12 col-md-6 text-md-0 h6 lh-base">
-                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es corto.</p>
+                <div class="col-12 col-md-6 text-md-0 h6 lh-base">  
+                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span id="about" class="fw-semibold">Bootstrap,</span> para cuando el tiempo es corto.</p> <!-- pongo el about acá para que posicione el scroll acá en movil -->
 
                         <div class="form-check form-switch me-2">
                             <input class="form-check-input" type="checkbox" id="skillsToggle" style="position: relative; top: -0.1px;" data-bs-toggle="collapse" data-bs-target="#skills">
@@ -37,10 +37,7 @@
                     </p>
                 </div>
             </section>
-
-
-
-
+    <!-- skills --------------------------------------------------------------------------------------------------------- -->
             <section class="collapse mt-3" id="skills">
                 <div class="row mb-3">
                     <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
@@ -106,14 +103,11 @@
                           </table>
                     </div>
                 </div>
-
-
             </section>
-            
         </div>
     </section>
     
-    <!-- contenedor de proyecto abierto -->
+    <!-- contenedor de proyecto abierto ----------------------------------------------------------------------------------- -->
     <section id="project"></section>
 
     <!-- galería de proyectos -->
@@ -124,7 +118,7 @@
     window.scrollBy(0, 1);
     window.scrollBy(0, -1);
     
-    // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS --------------------------------------------- //
+    // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS ------------------------------------------------------------------------- //
 
     /* función autoinvocada, sin nombre por eso se invoca al final con () */
 
@@ -195,7 +189,7 @@
     })();
 
 
-    // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------- //
+    // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------------------------- //
 
     function getProject(id) {
         fetch('post.json')
@@ -287,7 +281,7 @@
         location.href = "#project";
     }
 
-    // Cambiar el color del fondo ------------------------------------------------- //
+    // Cambiar el color del fondo ----------------------------------------------------------------------------------------- //
     const colores = [
     "#FF5733", "#33FF57", "#3357FF", "#F39C12", "#9B59B6",
     "#1ABC9C", "#E74C3C", "#2ECC71"
@@ -325,17 +319,21 @@
         activo = !activo; // alterna entre true/false
     });
 
-    // MOVER SCROLL SEGÚN TOGGLE EN SKILLS----------------------------- //
+    // MOVER SCROLL SEGÚN TOGGLE EN SKILLS--------------------------------------------------------------------------------- //
     document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.getElementById("skillsToggle");
+    const aboutSection = document.getElementById("about");
 
         toggle.addEventListener("change", function () {
             if (toggle.checked) {
             console.log("Toggle activado");
-            window.location.href = "#about";
+            aboutSection.scrollIntoView({ behavior: "smooth" });
+            //window.location.href = "#about";
+            
             } else {
             console.log("Toggle desactivado");
-            window.location.href = "#";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            //window.location.href = "#";
             }
         });
     });
