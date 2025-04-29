@@ -2,22 +2,16 @@
     margin: 0;
     padding: 0;
 }
-
 html, body {
     max-width: 100%;
     overflow-x: hidden;
     scroll-behavior: smooth;
     background-color: #ffffff;
 }
-
 body{
     font-family: "Albert Sans", sans-serif;
     font-size: 14px;
     transition: background-color 1s ease-in-out;
-}
-
-#skills, #output{
-    mix-blend-mode: multiply;
 }
 
 a{
@@ -33,6 +27,12 @@ p{
     font-weight: 300;
 }
 
+#skills, #output{
+    mix-blend-mode: multiply;
+}
+#toggle {
+    scroll-margin-top: 20px; /* Ajusta el margen del scroll */
+}
 #tabla{
     font-weight: 300;
 }
@@ -53,27 +53,30 @@ p{
 .form-check-input {
     mix-blend-mode: multiply;
 }
-
 .form-check-input:checked {
     background-color: #000 !important;
     border-color: #000 !important;
 }
-
-#categoryFilter{
-    mix-blend-mode: multiply;
-}
-
-.focus-custom{
-    border-color: #CBCCCD;
-}
-
-.focus-custom:focus{
+.form-check-input:focus{
     outline: none;
     box-shadow: none;
     border-color: inherit;
 }
 
-
+#categoryFilter{
+    mix-blend-mode: multiply;
+}
+.focus-custom{
+    border-color: #CBCCCD;
+}
+.focus-custom:focus{
+    outline: none;
+    box-shadow: none;
+    border-color: inherit;
+}
+#categoryFilter {
+    scroll-margin-top: 30px; /* Ajusta el margen del scroll */
+}
 
 @media(max-width:576px){
     .container{

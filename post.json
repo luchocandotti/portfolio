@@ -2,9 +2,9 @@
   {
     "id": "17",
     "title": "Revolve",
-    "category": "branding",
+    "category": "[branding]",
     "date": "Santa Fe — Santa Fe [2025]",
-    "intro": "<span class='fw-semibold'>Empresa de ciberseguridad:</span><br>Diseño de marca + manual de aplicación + web.",
+    "intro": "<span class='fw-semibold'>Estudio de marketing:</span><br>Diseño de marca",
     "descript": "En nuestro imaginaro colectivo, la idea de ir hacia arriba siempre es algo positivo. Sea morfología humana,cuestión de números de mercado o religiosa-metafísicamente.<br><br>El acento ^ es una forma poco obvia y minimalista de utilizar esta idea.",
     "cant": "5",
     "related": "[0, 0]",
@@ -15,7 +15,7 @@
     "title": "Foreman™",
     "category": "[branding, web]",
     "date": "Rosario — Santa Fe [2025]",
-    "intro": "<span class='fw-semibold'>Estudio de Marketing:</span><br>Diseño de marca",
+    "intro": "<span class='fw-semibold'>Empresa de ciberseguridad:</span><br>Diseño de marca + manual de aplicación + web.",
     "descript": "En un mundo donde la ciberseguridad es más importante que nunca, FOREMAN ayuda a proteger los activos digitales y mantener los sistemas seguros.",
     "cant": "9",
     "related": "[0, 0]",
@@ -46,7 +46,7 @@
   {
     "id": "13",
     "title": "Javier Cucina",
-    "category": "[branding, audiovisual, social]",
+    "category": "[branding, audiovisual, social, lettering]",
     "date": "Posadas — Misiones [2023]",
     "intro": "<span class='fw-semibold'>Productor de panificados:</span><br>Diseño de marca + producción audiovisual para productos.",
     "descript": "Emprendimiento de panificados caseros. Su mayor movimiento en ventas es durante fechas especiales como feriados o festividades.",
@@ -90,7 +90,7 @@
   {
     "id": "9",
     "title": "Jes",
-    "category": "[branding]",
+    "category": "[branding, lettering]",
     "date": "Puerto Rico — Misiones [2023]",
     "intro": "<span class='fw-semibold'>Fábrica de indumentaria y accesorios textiles:</span><br>Rediseño.",
     "descript": "Es proyectual: viene del diseño y se pone en diálogo con el arte para ponerlo en exposición.",
@@ -179,7 +179,7 @@
   {
     "id": "1",
     "title": "Logofolio 2012/2023",
-    "category": "[branding]",
+    "category": "[branding, lettering]",
     "date": "Posadas — Misiones",
     "intro": "Un vistazo rápido a las marcas que he realizado en los últimos años.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
