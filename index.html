@@ -28,7 +28,7 @@
                     <p>Mi habilidad primaria es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve a todo más atractivo, sino que ayuda en la <span class="fw-semibold">interacción [UI-UX]</span> con el programa y en la asimilación de la información [Conversión].</p>
                 </div>
                 <div class="col-12 col-md-6 text-md-0 h6 lh-base">  
-                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span id="about" class="fw-semibold">Bootstrap,</span> para cuando el tiempo es corto.</p> <!-- pongo el about acá para que posicione el scroll acá en movil -->
+                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span id="about" class="fw-semibold">Bootstrap,</span> para cuando el tiempo es corto.</p> <!-- pongo el about acá para que posicione el scroll acá y no al corte del label -->
 
                         <div class="form-check form-switch me-2">
                             <input class="form-check-input" type="checkbox" id="skillsToggle" style="position: relative; top: -0.1px;" data-bs-toggle="collapse" data-bs-target="#skills">
@@ -106,23 +106,35 @@
             </section>
         </div>
     </section>
+
+    <!-- filter ------------------------------------------------------------------------------------------------------------- -->
+    <section>
+        <div class="container text-end mb-3">
+            <select id="categoryFilter" class="form-select focus-custom rounded-0" aria-label="Filtro">
+                <option value="" selected>Todos los proyectos</option>
+                <option value="branding">Branding</option>
+                <option value="web">Web</option>
+                <option value="audiovisual">Audiovisual</option>
+                <option value="social">Social</option>
+              </select>
+        </div>
+    </section>
     
     <!-- contenedor de proyecto abierto ----------------------------------------------------------------------------------- -->
     <section id="project"></section>
 
     <!-- galería de proyectos -->
+    <div id="filtros"></div>
     <section id="output"></section>
 
    <script>
 
-    window.scrollBy(0, 1);
-    window.scrollBy(0, -1);
-    
     // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS ------------------------------------------------------------------------- //
 
-    /* función autoinvocada, sin nombre por eso se invoca al final con () */
+    let category = '';
+    getGrilla();
 
-    (function () { 
+    function getGrilla() {
         fetch('post.json')
         .then((res) => res.json())
         .then((data) => {
@@ -131,10 +143,34 @@
             
             // Creamos un array para almacenar todas las promesas de carga de imágenes
             const imagePromises = [];
-
             let output = '';
 
-            data.forEach(function(post){
+            function parseCategories(categoryString) {
+            // Quita los corchetes y divide por coma
+            return categoryString
+                .replace('[', '')
+                .replace(']', '')
+                .split(',')
+                .map(cat => cat.trim()); // Elimina espacios en blanco
+            }
+
+            // Filtramos data acá
+            const dataFiltrada = data.filter(post => {
+                // Si el filtro está vacío (''), devolver todos los elementos
+                if (category === '') {
+                    return true; // Esto se llama retorno temprano, para evitar cálculos innecesarios. Todo lo que sigue en la function no se ejecuta
+                }
+                /* Solo cuando category tiene un valor, necesitamos hacer el trabajo adicional de parsear la cadena y verificar si incluye la categoría buscada. */
+
+                // Convierte la cadena de categorías a un array
+                const categorias = parseCategories(post.category);
+                
+                // Verifica si la categoría que buscamos está en el array
+                return categorias.includes(category);
+            });
+
+
+            dataFiltrada.forEach(function(post){
                 /* Construímos los divs con la info + las imgs
 
                 Dentro del div usamos col-lg-4 separa la grilla en 3 en pantalla grande
@@ -147,7 +183,7 @@
                         <div class="card bg-light px-3 shadow-lg rounded-0">
                             <h3 class="fs-4 text-dark pt-3 pb-2">${post.title}</h3>
                             <div class="overflow-hidden">
-                                <a id="${post.id}" href="javascript:getProject('${post.id}')">
+                                <a id="${post.id}" href="javascript:getProject('${post.id}')">${/* acá es donde elegimos qué proyecto deseamos cargar*/''}
                                    <img class="img-fluid rounded-0 hover-zoom" style="transition: transform 0.5s ease;" src="./img/${post.id}/1.jpg">
                                 </a>
                             </div>
@@ -186,7 +222,17 @@
                 document.getElementById('output').innerHTML = galeria;
                 });
         })
-    })();
+    };
+
+    // Cambio al selector de categorías
+    document.getElementById('categoryFilter').addEventListener('change', function() {
+        // Actualizar la variable category con el valor seleccionado
+        category = this.value;
+        console.log('Categoría seleccionada:', category);
+    
+        // Volver a ejecutar getGrilla para actualizar la visualización
+        getGrilla();
+    });
 
 
     // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------------------------- //
