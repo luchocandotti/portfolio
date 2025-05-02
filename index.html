@@ -113,12 +113,6 @@
         <!-- Header de la sección con el filtro -->
         <header class="container text-end mb-3">
             <select id="categoryFilter" class="form-select focus-custom rounded-0" aria-label="Filtro">
-                <option value="" selected>Todos los proyectos</option>
-                <option value="branding">Branding</option>
-                <option value="web">Web</option>
-                <option value="audiovisual">Audiovisual</option>
-                <option value="social">Social</option>
-                <option value="lettering">Lettering</option>
             </select>
         </header>
         
@@ -129,31 +123,70 @@
 
    <script>
 
-    // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS ------------------------------------------------------------------------- //
-
     let category = '';
     let filtro = false;
     getGrilla();
 
+    // Convertimos en Array los datos de Category dentro del JSON
+    /* Se utiliza en dos intancias, primero se genera la lista de <select> y luego cada vez que se carga una categoría en la galería */
+    function parseCategories(categoryString) {
+        if (!categoryString) return [];
+  
+        return categoryString
+            .replace(/^\[|\]$/g, '') // Quita corchetes solo si están al principio/final
+            .split(',')
+            .map(cat => cat.trim())
+            .filter(cat => cat.length > 0); // Elimina categorías vacías
+    }
+
+    /* Esta función se debe ejecutar después de cargar el JSON
+    Lo que hace es leer todas las categorías presentes en el JSON y hacer una lista para ponerla dentro del desplegable <select> */
+    function generarSelectorCategorias(data) {
+        // Guardar la selección actual
+        const seleccionActual = document.getElementById('categoryFilter').value;
+        // Crear un conjunto para almacenar categorías únicas
+        const categoriasUnicas = new Set();
+        
+        // Recorrer todos los elementos del JSON
+        data.forEach(post => {
+            const categorias = parseCategories(post.category);
+        
+            // Añadir cada categoría al conjunto
+            categorias.forEach(cat => {
+                if (cat) categoriasUnicas.add(cat);
+            });
+        });
+        
+        // Convertir el conjunto a un array y ordenarlo alfabéticamente
+        const arrayCategorias = Array.from(categoriasUnicas).sort();
+        
+        // Crear las opciones HTML usando map
+        const opcionesHTML = arrayCategorias.map(cat => 
+        `<option value="${cat}">${cat.charAt(0).toUpperCase() + cat.slice(1)}</option>`
+        ).join('');
+        
+        // Crear la opción "Todos los proyectos"
+        const opcionTodos = '<option value="" selected>Todos los proyectos</option>';
+        
+        // Actualizar el HTML del select
+        document.getElementById('categoryFilter').innerHTML = opcionTodos + opcionesHTML;
+        // Establecer la selección anterior
+        document.getElementById('categoryFilter').value = seleccionActual;
+    }
+
+    // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS ------------------------------------------------------------------------- //
     function getGrilla() {
         fetch('post.json')
         .then((res) => res.json())
         .then((data) => {
+            // Generar las opciones del selector de forma dinámica
+            generarSelectorCategorias(data);
             // Mostramos algún indicador de carga
             document.getElementById('output').innerHTML = '<div class="text-center p-5"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
             
             // Creamos un array para almacenar todas las promesas de carga de imágenes
             const imagePromises = [];
             let output = '';
-
-            function parseCategories(categoryString) {
-            // Quita los corchetes y divide por coma
-            return categoryString
-                .replace('[', '')
-                .replace(']', '')
-                .split(',')
-                .map(cat => cat.trim()); // Elimina espacios en blanco
-            }
 
             // Filtramos data acá
             const dataFiltrada = data.filter(post => {
@@ -162,10 +195,7 @@
                     return true; // Esto se llama retorno temprano, para evitar cálculos innecesarios. Todo lo que sigue en la function no se ejecuta
                 }
                 /* Solo cuando category tiene un valor, necesitamos hacer el trabajo adicional de parsear la cadena y verificar si incluye la categoría buscada. */
-
-                // Convierte la cadena de categorías a un array
                 const categorias = parseCategories(post.category);
-                
                 // Verifica si la categoría que buscamos está en el array
                 return categorias.includes(category);
             });
@@ -383,12 +413,9 @@
             if (toggle.checked) {
             console.log("Toggle activado");
             aboutSection.scrollIntoView({ behavior: "smooth" });
-            //window.location.href = "#about";
-            
             } else {
             console.log("Toggle desactivado");
             window.scrollTo({ top: 0, behavior: "smooth" });
-            //window.location.href = "#";
             }
         });
     });
