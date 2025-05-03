@@ -125,6 +125,7 @@
 
     let category = '';
     let filtro = false;
+    let hiddenElements = [];
     getGrilla();
 
     // Convertimos en Array los datos de Category dentro del JSON
@@ -276,6 +277,11 @@
     // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------------------------- //
 
     function getProject(id) {
+        /*hiddenElements.push(id);
+        // Esconde el elemento
+        document.getElementById(id).classList.add("d-none");
+        document.getElementById(id).classList.remove("d-block");*/
+        //Carga la info para el project
         fetch('post.json')
         .then((res) => res.json())
         .then((data) => {
@@ -363,6 +369,14 @@
     // Cerramos el proyecto y volvemos a la galería
     function getClose(id){
         document.getElementById('project').innerHTML = '';
+        /*if (hiddenElements.length > 0) {
+            // Toma el último elemento escondido
+            const lastHiddenElement = hiddenElements.pop();
+            
+            // Muestra este elemento
+            document.getElementById(lastHiddenElement).classList.remove("d-none");
+            document.getElementById(lastHiddenElement).classList.add("d-block");
+        }*/
 
         document.getElementById(id).style="scroll-margin-top: 20px;"
         document.getElementById(id).scrollIntoView({ behavior: "smooth" }); // Volvemos el scroll a donde nos habíamos quedado
