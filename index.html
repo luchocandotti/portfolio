@@ -245,7 +245,13 @@
             Promise.all(imagePromises)
                 .then(() => {
                 // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
-                document.getElementById('output').innerHTML = galeria;
+                /* 
+                Inicialmente usaba document.getElementById('output').innerHTML = proyecto; 
+                Hablando con Claude y estudiando con Traversy, veo que este tipo de prácticas 'linyeras' pueden llevar a problemas cuando una app web es más grande de lo que estoy manejando ahora, o supongo, en un dispositivo viejo o con poca capacidad.
+                */
+                const temp = document.createElement('div');
+                temp.innerHTML = galeria;
+                document.getElementById('output').replaceChildren(...temp.childNodes);
 
                 if (filtro === true){
                     document.getElementById('categoryFilter').scrollIntoView({ behavior: "smooth" });
@@ -256,7 +262,9 @@
                 })
                 .catch(() => {
                 // En caso de error en alguna imagen, mostramos el contenido de todas formas
-                document.getElementById('output').innerHTML = galeria;
+                const temp = document.createElement('div');
+                temp.innerHTML = galeria;
+                document.getElementById('output').replaceChildren(...temp.childNodes);
                 });
         })
     };
@@ -310,6 +318,9 @@
             }
   
             // Construimos el contenedor con todas las imágenes
+            /* 
+                Esto es lo que teóricamente está mal, porque en vez de crerar los elementos ortodoxamente, lo estoy haciendo en modo 'linyera', por el momento es un proyecto chico y no parece haber problemas, pero debo considerarlo cuando codee programas más robustos.
+            */
             let proyecto = `
                 <div class="container pt-5">
                 <h1 class="pb-4 text-dark">${project.title}</h1>
@@ -334,7 +345,10 @@
             Promise.all(imagePromises)
                 .then(() => {
                 // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
-                document.getElementById('project').innerHTML = proyecto;
+                const temp = document.createElement('div');
+                temp.innerHTML = proyecto;
+                document.getElementById('project').replaceChildren(...temp.childNodes);
+
                 location.href = "#project";
                 detenerIntervalo();
                 activo = false;
@@ -349,7 +363,10 @@
                 })
                 .catch(() => {
                 // En caso de error en alguna imagen, mostramos el contenido de todas formas
-                document.getElementById('project').innerHTML = proyecto;
+                const temp = document.createElement('div');
+                temp.innerHTML = proyecto;
+                document.getElementById('project').replaceChildren(...temp.childNodes);
+
                 detenerIntervalo();
                 activo = false;
                 });
@@ -362,7 +379,7 @@
 
     // Cerramos el proyecto y volvemos a la galería
     function getClose(id){
-        document.getElementById('project').innerHTML = '';
+        document.getElementById('project').replaceChildren();
 
         document.getElementById(id).style="scroll-margin-top: 20px;"
         document.getElementById(id).scrollIntoView({ behavior: "smooth" }); // Volvemos el scroll a donde nos habíamos quedado
