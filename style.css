@@ -2,17 +2,30 @@
     margin: 0;
     padding: 0;
 }
+  
 html, body {
     max-width: 100%;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background-color: #ffffff;
 }
 body{
     font-family: "Albert Sans", sans-serif;
     font-size: 14px;
-    transition: background-color 1s ease-in-out;
 }
+
+#fondo-color {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFF;
+    display: none;
+    z-index: 3;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    transition: background-color 1s ease-in-out;
+  }
 
 a{
     text-decoration: none;
@@ -27,9 +40,7 @@ p{
     font-weight: 300;
 }
 
-#skills, #output{
-    mix-blend-mode: multiply;
-}
+
 #toggle {
     scroll-margin-top: 20px; /* Ajusta el margen del scroll */
 }
@@ -50,9 +61,6 @@ p{
     text-decoration: underline;
 }
 
-.form-check-input {
-    mix-blend-mode: multiply;
-}
 .form-check-input:checked {
     background-color: #000 !important;
     border-color: #000 !important;
@@ -63,9 +71,6 @@ p{
     border-color: inherit;
 }
 
-#categoryFilter{
-    mix-blend-mode: multiply;
-}
 .focus-custom{
     border-color: #CBCCCD;
 }
