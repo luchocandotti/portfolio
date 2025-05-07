@@ -320,16 +320,20 @@
                         } else {
                         // Es un video
                         const videoPath = `./img/${project.id}/${img}.mp4`;
-                        imgInsert += `<video class="w-100 pb-4" controls playsinline poster src="${videoPath}"></video>`;
+                        const poster = `./img/${project.id}/${img}.jpg`;
+                        imgInsert += `<video class="w-100 pb-4" controls playsinline poster="${poster}" src="${videoPath}"></video>`;
                         
                         // Creamos una promesa para el video
                         const videoPromise = new Promise((resolve, reject) => {
                             const tempVideo = document.createElement('video');
+
+                            const videoLoaded = () => resolve();
+                            tempVideo.addEventListener('loadeddata', videoLoaded);
+                            tempVideo.addEventListener('canplaythrough', videoLoaded);
                             tempVideo.onloadeddata = () => resolve();
                             tempVideo.onerror = () => reject();
                             tempVideo.src = videoPath;
                         });
-                    imagePromises.push(videoPromise);
                     }
                 } else {
                     // Solo hay imágenes
