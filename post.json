@@ -7,6 +7,7 @@
     "intro": "<span class='fw-semibold'>Estudio de marketing:</span><br>Diseño de marca",
     "descript": "En nuestro imaginaro colectivo, la idea de ir hacia arriba siempre es algo positivo. Sea morfología humana, cuestión de números de mercado o religiosa-metafísicamente.<br><br>El acento ^ es una forma poco obvia y minimalista de utilizar esta idea.",
     "cant": "5",
+    "video": "",
     "related": "[0, 0]",
     "link": "instagr.am/xrevolve.online"
   },
@@ -18,6 +19,7 @@
     "intro": "<span class='fw-semibold'>Empresa de ciberseguridad:</span><br>Diseño de marca + manual de aplicación + web.",
     "descript": "En un mundo donde la ciberseguridad es más importante que nunca, FOREMAN ayuda a proteger los activos digitales y mantener los sistemas seguros.",
     "cant": "9",
+    "video": "",
     "related": "[0, 0]",
     "link": "foreman.com.ar"
   },
@@ -29,6 +31,7 @@
     "intro": "<span class='fw-semibold'>Empresa de tipo holding:</span><br>Diseño de marca + manual de aplicación.",
     "descript": "La empresa apunta en un futuro a tener sub-empresas que se dediquen de lleno a rubros específicos. Por eso la elección de una marca paraguas, es decir: una marca que agrupa otras marcas.<br><br>La geometría de los poliedros 3D, no solo grafica la unión de vectores en una sola masa, sino que permite matemáticamente una escalabilidad virtualmente infinita.",
     "cant": "11",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -40,6 +43,7 @@
     "intro": "<span class='fw-semibold'>Indumentaria industrial:</span><br>Diseño de marca.",
     "descript": "Marca de indumentaria de alta resistencia, destinada tanto a trabajadores del campo y la industria, como a estudiantes de escuelas técnicas.",
     "cant": "5",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -51,6 +55,7 @@
     "intro": "<span class='fw-semibold'>Productor de panificados:</span><br>Diseño de marca + producción audiovisual para productos.",
     "descript": "Emprendimiento de panificados caseros. Su mayor movimiento en ventas es durante fechas especiales como feriados o festividades.",
     "cant": "10",
+    "video": "",
     "related": "[0, 0]",
     "link": "instagr.am/javiercucina"
   },
@@ -62,6 +67,7 @@
     "intro": "<span class='fw-semibold'>Club de patín artístico de competencia:</span><br>Retoque de marca + manual de aplicación.",
     "descript": "Se redibujó el reconocido águila alemán, se reacomodó el denominador de la marca para que acompañe al escudo. En cuanto a la tipografía del logo, se utilizó Fraktur: tipografía usada en Alemania para la mayor parte de sus libros editados entre los siglos XVI y XIX.",
     "cant": "5",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -73,6 +79,7 @@
     "intro": "<span class='fw-semibold'>Asesor de negocios para emprendedores:</span><br>Diseño de marca.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
     "cant": "4",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -84,6 +91,7 @@
     "intro": "<span class='fw-semibold'>Vendedora de Tupperware:</span><br>Naming y producción foto-producto para Instagram.",
     "descript": "Es proyectual: viene del diseño y se pone en diálogo con el arte para ponerlo en exposición.",
     "cant": "11",
+    "video": "",
     "related": "[0, 0]",
     "link": "instagr.am/tupperfect"
   },
@@ -95,6 +103,7 @@
     "intro": "<span class='fw-semibold'>Fábrica de indumentaria y accesorios textiles:</span><br>Rediseño.",
     "descript": "Es proyectual: viene del diseño y se pone en diálogo con el arte para ponerlo en exposición.",
     "cant": "8",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -106,6 +115,7 @@
     "intro": "<span class='fw-semibold'>Galería de arte contemporáneo & tienda:</span><br>Marca + sistema gráfico + marca tienda + audiovisual.",
     "descript": "Es proyectual: viene del diseño y se pone en diálogo con el arte para ponerlo en exposición.",
     "cant": "9",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -117,6 +127,7 @@
     "intro": "<span class='fw-semibold'>Estación de servicio con franquicia Shell:</span><br>Marca y sistema gráfico simple.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
     "cant": "9",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -127,7 +138,8 @@
     "date": "Posadas — Misiones [2021]",
     "intro": "<span class='fw-semibold'>Marca paraguas:</span><br>Símbolo base + subsímbolos @l_satoris y @r_satoris.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
-    "cant": "4",
+    "cant": "5",
+    "video": "1",
     "related": "[0, 0]",
     "link": "instagr.am/__satoris__"
   },
@@ -139,6 +151,7 @@
     "intro": "<span class='fw-semibold'>Entrenadora física online:</span><br>Logotipo + símbolo + videos para YouTube.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
     "cant": "4",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -150,6 +163,7 @@
     "intro": "<span class='fw-semibold'>Sandwichería artesanal no convencional, empaquetada al vacío para llevar:</span><br>Lettering + logotipo.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
     "cant": "10",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -161,6 +175,7 @@
     "intro": "<span class='fw-semibold'>Programador de sistemas web:</span><br>Naming y logotipo + símbolo.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
     "cant": "4",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   },
@@ -172,6 +187,7 @@
     "intro": "<span class='fw-semibold'>Mayorista de repuestos para motos:</span><br>Rediseño de marca.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
     "cant": "10",
+    "video": "",
     "color": "#540000",
     "related": "[0, 0]",
     "link": ""
@@ -184,6 +200,7 @@
     "intro": "Un vistazo rápido a las marcas que he realizado en los últimos años.",
     "descript": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ullam eos accusamus culpa enim aperiam?",
     "cant": "8",
+    "video": "",
     "related": "[0, 0]",
     "link": ""
   }

@@ -293,7 +293,7 @@
             // Verificamos que encontramos el proyecto
             if (project) {
                 // Posicionamos el scroll
-                location.href = "#project";
+                document.getElementById('project').scrollIntoView({ behavior: "smooth" });
                 // Mostramos algún indicador de carga
                 document.getElementById('project').innerHTML = '<div class="text-center p-5"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
             
@@ -319,7 +319,7 @@
   
             // Construimos el contenedor con todas las imágenes
             /* 
-                Esto es lo que teóricamente está mal, porque en vez de crerar los elementos ortodoxamente, lo estoy haciendo en modo 'linyera', por el momento es un proyecto chico y no parece haber problemas, pero debo considerarlo cuando codee programas más robustos.
+                Esto es lo que teóricamente está mal, porque en vez de crear los elementos ortodoxamente, lo estoy haciendo en modo 'linyera', por el momento es un proyecto chico y no parece haber problemas, pero debo considerarlo cuando codee programas más robustos.
             */
             let proyecto = `
                 <div class="container pt-5">
@@ -349,7 +349,6 @@
                 temp.innerHTML = proyecto;
                 document.getElementById('project').replaceChildren(...temp.childNodes);
 
-                location.href = "#project";
                 detenerIntervalo();
                 activo = false;
 
