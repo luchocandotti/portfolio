@@ -83,6 +83,10 @@ p{
     scroll-margin-top: 30px; /* Ajusta el margen del scroll */
 }
 
+video::-webkit-media-controls-presentation-mode-button {
+    display: none !important;
+}
+
 @media(max-width:576px){
     .container{
         padding: 0 40px 0 40px;
