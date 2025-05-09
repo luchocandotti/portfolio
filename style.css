@@ -71,6 +71,7 @@ p{
     border-color: inherit;
 }
 
+
 .focus-custom{
     border-color: #CBCCCD;
 }
@@ -92,3 +93,19 @@ video::-webkit-media-controls-presentation-mode-button {
         padding: 0 40px 0 40px;
     }
 }
+
+/* Estilos para dispositivos grandes (lg y superiores)
+@media (min-width: 992px) {
+    .multi-column-text {
+      column-count: 2;
+      column-gap: 30px;
+    }
+}
+  
+  Para dispositivos más pequeños, una sola columna 
+  @media (max-width: 991px) {
+    .multi-column-text {
+      column-count: 1;
+    }
+}
+    */

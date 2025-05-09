@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+        <style>
+            :root {
+            color-scheme: light;
+            background-color: #fff;
+            }
+        </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +34,7 @@
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
                     <p>Mi habilidad primaria es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve a todo más atractivo, sino que ayuda en la <span class="fw-semibold">interacción [UI-UX]</span> con el programa y en la asimilación de la información [Conversión].</p>
                 </div>
-                <div class="col-12 col-md-6 text-md-0 h6 lh-base">  
+                <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
                     <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es corto.</p>
 
                         <div class="form-check form-switch me-2">
@@ -119,12 +126,16 @@
         <!-- Contenedor de la galería de proyectos -->
         <div id="output"></div>
     </section>
+    <div id="fondo-color"></div>
+
+    <button type="button" id="floating-button" class="btn btn-dark position-fixed bottom-0 start-50 translate-middle-x mb-4 d-none rounded-circle shadow-lg"><i class="bi bi-x-lg" style="font-size: 1.5rem;"></i></button>
 
 
    <script>
 
     let category = '';
     let filtro = false;
+    let openProject;
     getGrilla();
 
     // Convertimos en Array los datos de Category dentro del JSON
@@ -210,7 +221,7 @@
                 const imgPath = `./img/${post.id}/1.jpg`;
 
                 output += `
-                    <div id="${post.id}" class="col-lg-4 col-md-6 pb-4">
+                    <div id="c${post.id}" class="col-lg-4 col-md-6 pb-4">
                         <div class="card bg-light px-3 shadow-lg rounded-0">
                             <h3 class="fs-4 text-dark pt-3 pb-2">${post.title}</h3>
                             <div class="overflow-hidden">
@@ -284,6 +295,8 @@
     // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------------------------- //
 
     function getProject(id) {
+        openProject = 'c'+id;
+        console.log(open);
         fetch('post.json')
         .then((res) => res.json())
         .then((data) => {
@@ -296,25 +309,62 @@
                 document.getElementById('project').scrollIntoView({ behavior: "smooth" });
                 // Mostramos algún indicador de carga
                 document.getElementById('project').innerHTML = '<div class="text-center p-5"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
+
+                document.getElementById('floating-button').classList.remove('d-none');
+                document.getElementById('floating-button').classList.add('d-block');
             
-                // Creamos un array para almacenar todas las promesas de carga de imágenes
                 const imagePromises = [];
                 let imgInsert = '';
-            
-            // Cargamos todas las url/img en un string y creamos promesas para cada imagen
-            for(let img = 2; img <= project.cant; img++) {
-                const imgPath = `./img/${project.id}/${img}.jpg`;
-                imgInsert += `<img class="img-fluid pb-4" src="${imgPath}">`;
-                
-                // Creamos una promesa para cada imagen
-                const imagePromise = new Promise((resolve, reject) => {
+
+                for (let img = 2; img <= project.cant; img++) {
+                if (project.video != '') {
+                    const cantidad = project.cant - project.video;
+                        // Hay imagenes y videos
+                        if (img <= cantidad) {
+                        // Es una imagen
+                        const imgPath = `./img/${project.id}/${img}.jpg`;
+                        imgInsert += `<img class="img-fluid pb-4" src="${imgPath}">`;
+                        
+                        // Creamos una promesa para la imagen
+                        const imagePromise = new Promise((resolve, reject) => {
+                            const tempImg = new Image();
+                            tempImg.onload = () => resolve();
+                            tempImg.onerror = () => reject();
+                            tempImg.src = imgPath;
+                        });
+                        imagePromises.push(imagePromise);
+                        } else {
+                        // Es un video
+                        const videoPath = `./img/${project.id}/${img}.mp4`;
+                        const poster = `./img/${project.id}/${img}.jpg`;
+                        imgInsert += `<video class="w-100 pb-4" controls disablePictureInPicture controlsList="nodownload" playsinline poster="${poster}" src="${videoPath}"></video>`;
+                        
+                        // Creamos una promesa para el video
+                        const videoPromise = new Promise((resolve, reject) => {
+                            const tempVideo = document.createElement('video');
+
+                            const videoLoaded = () => resolve();
+                            tempVideo.addEventListener('loadeddata', videoLoaded);
+                            tempVideo.addEventListener('canplaythrough', videoLoaded);
+                            tempVideo.onloadeddata = () => resolve();
+                            tempVideo.onerror = () => reject();
+                            tempVideo.src = videoPath;
+                        });
+                    }
+                } else {
+                    // Solo hay imágenes
+                    const imgPath = `./img/${project.id}/${img}.jpg`;
+                    imgInsert += `<img class="img-fluid pb-4" src="${imgPath}">`;
+                    
+                    // Creamos una promesa para la imagen
+                    const imagePromise = new Promise((resolve, reject) => {
                     const tempImg = new Image();
                     tempImg.onload = () => resolve();
                     tempImg.onerror = () => reject();
                     tempImg.src = imgPath;
-                });
-                
-                imagePromises.push(imagePromise);
+                    });
+                    imagePromises.push(imagePromise);
+                }
             }
   
             // Construimos el contenedor con todas las imágenes
@@ -324,20 +374,27 @@
             let proyecto = `
                 <div class="container pt-5">
                 <h1 class="pb-4 text-dark">${project.title}</h1>
-                <h2 class="pb-3 text-dark fw-light">${project.descript}</h2>
-                <div class="row mb-4">
-                    <div class="col-12 col-md-6 mb-3 mb-md-0">
-                    <p>${project.intro}</p>
+                <div class="row pb-4">
+                    <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
+                        <h2 class="text-dark fw-light lh-base h6">${project.descript1}</h2>
                     </div>
-                    <div class="col-12 col-md-6 text-md-end">
-                    <p>${project.date}<br><a id="linkIcon" href="https://${project.link}/" target="_blank"><i class="bi bi-link-45deg align-text-middle fs-5 pe-2"></i>${project.link}</a></p>
+                    <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
+                        <h2 class="text-dark fw-light lh-base h6">${project.descript2}</h2>
                     </div>
                 </div>
-                <a id="projector" href="javascript:getClose(${id})">
-                    <div class="row">
-                    ${imgInsert}
+                <div class="row mb-4">
+                    <div class="col-12 col-md-6 mb-3 mb-md-0 text-muted">
+                    <p>${project.intro}</p>
                     </div>
-                </a>
+                    <div class="col-12 col-md-6 mb-3 text-md-end text-muted lh-sm">
+                    <p>${project.date}<br><a id="linkIcon" href="https://${project.link}/" target="_blank"><i class="bi bi-link-45deg align-text-middle fs-5 pe-2" style="position: relative; top: 1.7px"></i>${project.link}</a></p>
+                    </div>
+                </div>
+                    ${/* falta una forma de cerrar el proyecto que sea piola */''}
+                    <div class="row">
+                        ${imgInsert}
+                    </div>
+
                 </div>
             `;
   
@@ -376,14 +433,6 @@
         });
     };
 
-    // Cerramos el proyecto y volvemos a la galería
-    function getClose(id){
-        document.getElementById('project').replaceChildren();
-
-        document.getElementById(id).style="scroll-margin-top: 20px;"
-        document.getElementById(id).scrollIntoView({ behavior: "smooth" }); // Volvemos el scroll a donde nos habíamos quedado
-    }
-
     // Cambiar el color del fondo ----------------------------------------------------------------------------------------- //
     const colores = [
     "#FF5733", "#33FF57", "#3357FF", "#F39C12", "#9B59B6",
@@ -397,11 +446,11 @@
     function iniciarIntervalo() {
         if (intervaloID === null) { // prevenir múltiples intervalos superpuestos
             // Cambiar color inmediatamente
-            document.body.style.backgroundColor = colores[indice];
+            document.getElementById('fondo-color').style.backgroundColor = colores[indice];
             indice = (indice + 1) % colores.length;
             // Después arrancar el intervalo
             intervaloID = setInterval(() => {
-            document.body.style.backgroundColor = colores[indice];
+            document.getElementById('fondo-color').style.backgroundColor = colores[indice];
             indice = (indice + 1) % colores.length;
             }, 3000);
         }
@@ -410,13 +459,15 @@
     function detenerIntervalo() {
         clearInterval(intervaloID);
         intervaloID = null; // reiniciar
-        document.body.style.backgroundColor = "#FFFFFF";
+        document.getElementById('fondo-color').style.display = "none";
     }
 
     document.getElementById('color').addEventListener("click", () => {
         if (!activo) {
+            document.getElementById('fondo-color').style.display = "block";
             iniciarIntervalo();
         } else {
+            document.getElementById('fondo-color').style.display = "none";
             detenerIntervalo();
         }
         activo = !activo; // alterna entre true/false
@@ -437,7 +488,20 @@
             }
         });
     });
-    
+
+    // Cerramos el proyecto y volvemos a la galería
+    function getClose(){
+        document.getElementById('project').replaceChildren();
+        
+        document.getElementById('floating-button').classList.remove('d-block');
+        document.getElementById('floating-button').classList.add('d-none');
+        // Volver el scroll al último proyecto abierto
+        document.getElementById(openProject).style="scroll-margin-top: 20px;"
+        document.getElementById(openProject).scrollIntoView({ behavior: "smooth" });
+    }
+
+    document.getElementById('floating-button').addEventListener('click', getClose);
+
    </script>
 
 
