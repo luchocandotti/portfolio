@@ -28,7 +28,7 @@
 
             <!-- <p>click para jugar <i class="bi bi-arrow-down align-text-middle fs-6"></i></p> -->
             <a id="color" href="#"><h3 class="pb-4 fw-light">
-            <i class="bi bi-arrow-repeat fs-4 pe-2" style="position: relative; top: -3px;"></i>Si funciona en blanco y negro = funciona siempre.<h3></a>
+            <i class="bi bi-arrow-repeat fs-4 pe-2" style="position: relative; top: -0.8px;"></i>Si funciona en blanco y negro = funciona siempre.<h3></a>
     <!-- about ------------------------------------------------------------------------------------------------------------- -->
             <section class="row mb-3">
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
@@ -297,6 +297,10 @@
     function getProject(id) {
         openProject = 'c'+id;
         console.log(open);
+
+        // Actualizar la URL con el hash sin recargar la página
+        history.pushState(null, null, `#${id}`);
+
         fetch('post.json')
         .then((res) => res.json())
         .then((data) => {
@@ -372,8 +376,9 @@
                 Esto es lo que teóricamente está mal, porque en vez de crear los elementos ortodoxamente, lo estoy haciendo en modo 'linyera', por el momento es un proyecto chico y no parece haber problemas, pero debo considerarlo cuando codee programas más robustos.
             */
             let proyecto = `
-                <div class="container pt-5">
-                <h1 class="pb-4 text-dark">${project.title}</h1>
+                <div class="container">
+                <hr class="border border-muted">
+                <h1 class="pt-3 pb-4 text-dark">${project.title}</h1>
                 <div class="row pb-4">
                     <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
                         <h2 class="text-dark fw-light lh-base h6">${project.descript1}</h2>
@@ -406,6 +411,9 @@
                 temp.innerHTML = proyecto;
                 document.getElementById('project').replaceChildren(...temp.childNodes);
 
+                //ACÁ VOLVÍ A USAR EL SCROLL, porque no es lo mismo el scroll del loader, que el scroll del proyecto.
+                document.getElementById('project').scrollIntoView({ behavior: "smooth" });
+
                 detenerIntervalo();
                 activo = false;
 
@@ -433,10 +441,62 @@
         });
     };
 
+    // Función para manejar cambios en el hash de la URL------------------------------------------------------------------- //
+    function handleHashChange() {
+        const hash = window.location.hash;
+        if (hash) {
+            // Extraer el ID del hash (eliminando el símbolo #)
+            const projectId = hash.substring(1);
+            // Verificar que el ID sea un número
+            if (!isNaN(projectId) && projectId.trim() !== '') {
+                // Posicionamos el scroll al inicio del contenedor de proyecto
+                // antes de cargar el nuevo proyecto
+                document.getElementById('project').scrollIntoView({ behavior: "smooth" });
+                // Cargar el proyecto correspondiente
+                getProject(projectId);
+            }
+        } else {
+        // Si no hay hash, significa que estamos en la landing
+        // Cerrar el proyecto abierto
+        getClose();
+        }
+    }
+
+    // Cerramos el proyecto y volvemos a la galería------------------------------------------------------------------------ //
+    function getClose(){
+        // Actualizar la URL eliminando el hash sin recargar la página
+        history.pushState(null, null, window.location.pathname);
+
+        document.getElementById('project').replaceChildren();
+        
+        document.getElementById('floating-button').classList.remove('d-block');
+        document.getElementById('floating-button').classList.add('d-none');
+
+        // Volver el scroll al último proyecto abierto
+        if (openProject) {
+        const projectElement = document.getElementById(openProject);
+            if (projectElement) {
+                projectElement.style="scroll-margin-top: 20px;";
+                projectElement.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    };
+
+    // Inicializar: verificar si hay un hash en la URL al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar si hay un hash en la URL inicial
+        handleHashChange();
+        
+        // Escuchar cambios en el hash (por si el usuario usa los botones de navegación del navegador)
+        window.addEventListener('hashchange', handleHashChange);
+    });
+
+    document.getElementById('floating-button').addEventListener('click', getClose);
+
     // Cambiar el color del fondo ----------------------------------------------------------------------------------------- //
     const colores = [
-    "#FF5733", "#33FF57", "#3357FF", "#F39C12", "#9B59B6",
-    "#1ABC9C", "#E74C3C", "#2ECC71"
+    "#F39C12", "#2ECC71", "#1188F2", "#9B59B6", "#F25E11",
+    "#F2D211", "#B38439", "#959595"
     ];
 
     let indice = 0;
@@ -451,6 +511,7 @@
             // Después arrancar el intervalo
             intervaloID = setInterval(() => {
             document.getElementById('fondo-color').style.backgroundColor = colores[indice];
+            //document.body.style.backgroundColor = colores[indice];
             indice = (indice + 1) % colores.length;
             }, 3000);
         }
@@ -489,18 +550,6 @@
         });
     });
 
-    // Cerramos el proyecto y volvemos a la galería
-    function getClose(){
-        document.getElementById('project').replaceChildren();
-        
-        document.getElementById('floating-button').classList.remove('d-block');
-        document.getElementById('floating-button').classList.add('d-none');
-        // Volver el scroll al último proyecto abierto
-        document.getElementById(openProject).style="scroll-margin-top: 20px;"
-        document.getElementById(openProject).scrollIntoView({ behavior: "smooth" });
-    }
-
-    document.getElementById('floating-button').addEventListener('click', getClose);
 
    </script>
 
