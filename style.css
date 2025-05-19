@@ -40,6 +40,16 @@ p{
     font-weight: 300;
 }
 
+.cursor{
+    animation-name: anim;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+@keyframes anim {
+    0% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+}
 
 #toggle {
     scroll-margin-top: 20px; /* Ajusta el margen del scroll */

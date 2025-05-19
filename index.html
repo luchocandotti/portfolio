@@ -22,20 +22,19 @@
     <!-- intro ------------------------------------------------------------------------------------------------------------ -->
     <section id="intro">
         <div class="container">
-            <h1 class="text-dark pt-5">Mi nombre es <span class="fw-bold">Luciano Candotti,</span><br>soy Diseñador Gráfico—Audiovisual con 15+ años de experiencia.</h1>
+            <h1 class="text-dark pt-5">Mi nombre es <span class="fw-bold">Luciano Candotti,</span><br>Diseñador Gráfico—Audiovisual con 15+ años de experiencia.</h1>
 
-            <h2 class="py-3 fw-light">Me especializo en <span class="fw-semibold">Branding y Desarrollo Front-End,</span> este último como fortaleza, pues implemento en código mi habilidad estética.</h2>
+            <h2 class="py-3 fw-light">Me especializo en <span class="fw-semibold">Branding y Desarrollo Front-End,</span> este último como diferencial, pues implemento en código mi habilidad estética.</h2>
 
             <!-- <p>click para jugar <i class="bi bi-arrow-down align-text-middle fs-6"></i></p> -->
-            <a id="color" href="#"><h3 class="pb-4 fw-light">
-            <i class="bi bi-arrow-repeat fs-4 pe-2" style="position: relative; top: -0.8px;"></i>Si funciona en blanco y negro = funciona siempre.<h3></a>
+            <a id="color" href="#"><h3 class="pb-4 fw-light">Si funciona en blanco y negro = funciona siempre<span class="cursor">|</span><h3></a>
     <!-- about ------------------------------------------------------------------------------------------------------------- -->
             <section class="row mb-3">
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
-                    <p>Mi habilidad primaria es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve a todo más atractivo, sino que ayuda en la <span class="fw-semibold">interacción [UI-UX]</span> con el programa y en la asimilación de la información [Conversión].</p>
+                    <p>Mi método es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve a todo más atractivo, sino que reduce la fricción <span class="fw-semibold">[UI-UX]</span> entre usuario y aplicación: maximizando la usabilidad que resultará en mejores relaciones usuario/producto-servicio.</p>
                 </div>
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
-                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es corto.</p>
+                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es  corto y no se puede comprometer la calidad estética.</p>
 
                         <div class="form-check form-switch me-2">
                             <input class="form-check-input" type="checkbox" id="skillsToggle" style="position: relative; top: -0.1px;" data-bs-toggle="collapse" data-bs-target="#skills">
@@ -526,6 +525,7 @@
     document.getElementById('color').addEventListener("click", () => {
         if (!activo) {
             document.getElementById('fondo-color').style.display = "block";
+            openProject=false;
             iniciarIntervalo();
         } else {
             document.getElementById('fondo-color').style.display = "none";
