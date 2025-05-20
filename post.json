@@ -1,5 +1,18 @@
 [
   {
+    "id": "18",
+    "title": "Juventus",
+    "category": "[branding]",
+    "date": "Santa Fe — Santa Fe [2025]",
+    "intro": "<span class='fw-semibold'>Gimnasio:</span><br>Rediseño de marca",
+    "descript1": "<strong>Desafío:</strong> La empresa contaba con una marca anticuada que no se destacaba entre la competencia. El gimnasio lucía descuidado, no generaba 'engagement' con sus usuarios. El cliente pidió basándose en el nombre de la empresa, aludir juventud como resultado del cuidado personal por medio del ejercicio.<br><br><strong>Método:</strong> Opté por una marca sólo tipográfica, debido a que en el rubro 'Gimnasio' se sobre utilizaron los elementos literales tales como siluetas de pesas o cuerpos haciendo fuerza.",
+    "descript2": "<strong>Solución:</strong> Con la elección tipográfica y los ajustes ópticos, las líneas diagonales aportan movimiento y un estilo joven a la gráfica. Se asemeja a marcas de ropa deportiva [Nike por ejemplo] lo cual acelera el reconocimiento del rubro por asociación.",
+    "cant": "12",
+    "video": "",
+    "related": "[0, 0]",
+    "link": ""
+  },
+  {
     "id": "17",
     "title": "Revolve",
     "category": "[branding, audiovisual]",
@@ -20,7 +33,7 @@
     "intro": "<span class='fw-semibold'>Empresa de informática:</span><br>Diseño de marca + manual de aplicación + web.",
     "descript1": "<strong>Desafío:</strong> Una consultora tecnológica especializada en seguridad informática/IA necesitaba una identidad que transmitiera sofisticación técnica y capacidad de automatización sin perder calidez humana.",
     "descript2": "<strong>Solución:</strong> Diseñé una identidad de marca que equilibra elementos tecnológicos con un enfoque centrado en resultados empresariales.<br>La marca refleja su especialización en implementación de software personalizado para automatización con IA.",
-    "cant": "10",
+    "cant": "12",
     "video": "",
     "related": "[0, 0]",
     "link": "foreman.com.ar"
@@ -44,7 +57,7 @@
     "category": "[branding]",
     "date": "Posadas — Misiones [2025]",
     "intro": "<span class='fw-semibold'>Indumentaria industrial:</span><br>Diseño de marca.",
-    "descript1": "<strong>Desafío:</strong> Crear una marca de indumentaria de alta resistencia que conectara auténticamente con trabajadores industriales y estudiantes de escuelas técnicas, diferenciándose en un mercado saturado.<br><br><strong>Proceso:</strong> Investigué a fondo las necesidades específicas de los usuarios finales, visitando entornos industriales y escuelas técnicas para comprender sus requerimientos reales de vestuario laboral.",
+    "descript1": "<strong>Desafío:</strong> Crear una marca de indumentaria de alta resistencia que conectara auténticamente con trabajadores industriales y estudiantes de escuelas técnicas, diferenciándose en un mercado saturado.<br><br><strong>Proceso:</strong> Investigué las necesidades específicas de los usuarios finales, visitando entornos industriales y escuelas técnicas para comprender sus requerimientos reales de indumentaria para seguridad laboral.",
     "descript2": "<strong>Solución:</strong> Desarrollé una identidad que evoca durabilidad y resistencia. El concepto 'Forja' conecta con el proceso de transformación bajo condiciones extremas, alineándose perfectamente con los valores del producto y su público objetivo.",
     "cant": "5",
     "video": "",
@@ -134,7 +147,7 @@
     "title": "Peta SRL",
     "category": "[branding]",
     "date": "Puerto Rico — Misiones [2018]",
-    "intro": "<span class='fw-semibold'>Estación de servicio con franquicia Shell:</span><br>Marca y sistema gráfico simple.",
+    "intro": "<span class='fw-semibold'>Estación de servicio franquiciada por Shell:</span><br>Marca y sistema gráfico simple.",
     "descript1": "<strong>Desafío:</strong> Desarrollar una marca atemporal para una empresa del rubro combustibles, que comunique simultáneamente dinamismo y compromiso ambiental.",
     "descript2": "<strong>Solución:</strong> Creé un concepto global basado en el principio físico 'la energía no se extingue, solo se transforma', integrando tres elementos simbólicos: la gota [representando el producto principal], la llama [energía en movimiento] y la hoja [compromiso medioambiental].",
     "cant": "9",

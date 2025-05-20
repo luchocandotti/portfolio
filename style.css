@@ -13,6 +13,21 @@ body{
     font-size: 14px;
 }
 
+
+/* div con degradé para difuminar el corte en movil 
+#top{
+    display: none;
+}
+.bg-linear {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(#ffffff, #ffffff00);
+    z-index: 5;
+}
+*/
 #fondo-color {
     position: fixed;
     top: 0;
@@ -25,7 +40,7 @@ body{
     mix-blend-mode: multiply;
     pointer-events: none;
     transition: background-color 1s ease-in-out;
-  }
+}
 
 a{
     text-decoration: none;
@@ -58,8 +73,15 @@ p{
     font-weight: 300;
 }
 
-.hover-zoom:hover {
-    transform: scale(1.15);
+.hover, .hover img {
+  transition: all 0.5s ease;
+}
+.hover:hover {
+    img{
+        transform: scale(1.15);
+    }
+    border-color:#000;
+    transform: translate(0,-5px);
 }
 
 #projector:hover{
@@ -101,6 +123,9 @@ video::-webkit-media-controls-presentation-mode-button {
 @media(max-width:576px){
     .container{
         padding: 0 40px 0 40px;
+    }
+    .bg-linear{
+        display:block;
     }
 }
 

@@ -23,7 +23,7 @@
     <!-- intro ------------------------------------------------------------------------------------------------------------ -->
     <section id="intro">
         <div class="container">
-            <h1 class="text-dark pt-5">Mi nombre es <span class="fw-bold">Luciano Candotti,</span><br>Diseñador Gráfico—Audiovisual con 15+ años de experiencia.</h1>
+            <h1 class="text-dark pt-5">Soy <span class="fw-bold">Luciano Candotti,</span><br>Diseñador Gráfico—Audiovisual con 15+ años de experiencia.</h1>
 
             <h2 class="py-3 fw-light">Me especializo en <span class="fw-semibold">Branding y Desarrollo Front-End,</span> este último como diferencial, pues implemento en código mi habilidad estética.</h2>
 
@@ -32,10 +32,10 @@
     <!-- about ------------------------------------------------------------------------------------------------------------- -->
             <section class="row mb-3">
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
-                    <p>Mi método es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve a todo más atractivo, sino que reduce la fricción <span class="fw-semibold">[UI-UX]</span> entre usuario y aplicación: maximizando la usabilidad que resultará en mejores relaciones usuario/producto-servicio.</p>
+                    <p>Mi método es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve todo más atractivo, sino que reduce la fricción <span class="fw-semibold">[UI-UX]</span> entre usuario y aplicación: maximizando la usabilidad que resultará en mejores relaciones del usuario con el producto-servicio.</p>
                 </div>
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
-                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos [Plano]:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es  corto y no se puede comprometer la calidad estética.</p>
+                    <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es poco y no se puede comprometer la calidad gráfica.</p>
 
                         <div class="form-check form-switch me-2">
                             <input class="form-check-input" type="checkbox" id="skillsToggle" style="position: relative; top: -0.1px;" data-bs-toggle="collapse" data-bs-target="#skills">
@@ -133,9 +133,9 @@
             <button type="button" id="floating-button-x" class="col btn btn-dark rounded-circle shadow-lg"><i class="bi bi-x-lg" style="font-size: 1.5rem;"></i></button>
             <button type="button" id="floating-button-next" class="col btn btn-dark rounded-circle shadow-lg"><i class="bi bi-arrow-right" style="font-size: 1.5rem;"></i></button>
     </div>
+
     
-
-
+    
    <script>
 
     let category = '';
@@ -229,12 +229,12 @@
                 console.log(limite);
 
                 output += `
-                    <div id="c${post.id}" class="col-lg-4 col-md-6 pb-4">
-                        <div class="card bg-light px-3 shadow-lg rounded-0">
+                    <div id="${post.id}" class="col-lg-4 col-md-6 pb-4">
+                        <div class="card bg-light px-3 shadow-lg rounded-0 hover">
                             <h3 class="fs-4 text-dark pt-3 pb-2">${post.title}</h3>
                             <div class="overflow-hidden">
                                 <a href="javascript:getProject('${post.id}')">${/* acá es donde elegimos qué proyecto deseamos cargar*/''}
-                                   <img class="img-fluid rounded-0 hover-zoom" style="transition: transform 0.5s ease;" src="./img/${post.id}/1.jpg">
+                                   <img class="img-fluid rounded-0" src="./img/${post.id}/1.jpg">
                                 </a>
                             </div>
                             <p class="pt-3 text-muted">${post.intro}</p>
@@ -318,27 +318,26 @@
         getProject(String(next));
     });
 
+    // Mostrar u ocultar btns según paginación
+    function paginador(){
+        if (openProject < limite && openProject != 1) {
+            btnPrev.classList.remove('d-none');
+            btnPrev.classList.add('d-block');
+            btnNext.classList.remove('d-none');
+            btnNext.classList.add('d-block');
+        } else if (openProject == limite) {
+            btnPrev.classList.remove('d-block');
+            btnPrev.classList.add('d-none');
+        } else {
+            btnNext.classList.remove('d-block');
+            btnNext.classList.add('d-none');
+        };
+    }
+
     // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------------------------- //
 
     function getProject(id) {
         openProject = id;
-
-        if (openProject < limite) {
-            btnPrev.classList.remove('d-none');
-            btnPrev.classList.add('d-block');
-        } else {
-            btnPrev.classList.remove('d-block');
-            btnPrev.classList.add('d-none');
-        }
-
-        if (openProject == 1){
-            btnNext.classList.remove('d-block');
-            btnNext.classList.add('d-none');
-        } else {
-            btnNext.classList.remove('d-none');
-            btnNext.classList.add('d-block');
-        }
-
         // Actualizar la URL con el hash sin recargar la página
         history.pushState(null, null, `#${id}`);
 
@@ -351,12 +350,14 @@
             // Verificamos que encontramos el proyecto
             if (project) {
                 // Posicionamos el scroll
-                document.getElementById('project').scrollIntoView({ behavior: "smooth" });
+                const proj = document.getElementById('project');
+                const botonera = document.getElementById('floating-button');
+                proj.scrollIntoView({ behavior: "smooth" });
                 // Mostramos algún indicador de carga
-                document.getElementById('project').innerHTML = '<div class="text-center p-5"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
+                proj.innerHTML = '<div class="text-center p-5"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
 
-                document.getElementById('floating-button').classList.remove('d-none');
-                document.getElementById('floating-button').classList.add('d-block');
+                botonera.classList.remove('d-none');
+                botonera.classList.add('d-block');
             
                 const imagePromises = [];
                 let imgInsert = '';
@@ -421,10 +422,10 @@
                 <hr class="border border-muted">
                 <h1 class="pt-3 pb-4 text-dark">${project.title}</h1>
                 <div class="row pb-4">
-                    <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
+                    <div class="col-12 col-md-6 mb-md-0 h6">
                         <h2 class="text-dark fw-light lh-base h6">${project.descript1}</h2>
                     </div>
-                    <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
+                    <div class="col-12 col-md-6 mb-md-0 h6">
                         <h2 class="text-dark fw-light lh-base h6">${project.descript2}</h2>
                     </div>
                 </div>
@@ -437,10 +438,9 @@
                     </div>
                 </div>
                     ${/* falta una forma de cerrar el proyecto que sea piola */''}
-                    <div class="row">
+                    <div class="row pb-3">
                         ${imgInsert}
                     </div>
-
                 </div>
             `;
   
@@ -450,17 +450,20 @@
                 // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
                 const temp = document.createElement('div');
                 temp.innerHTML = proyecto;
-                document.getElementById('project').replaceChildren(...temp.childNodes);
+                proj.replaceChildren(...temp.childNodes);
 
                 //ACÁ VOLVÍ A USAR EL SCROLL, porque no es lo mismo el scroll del loader, que el scroll del proyecto.
-                document.getElementById('project').scrollIntoView({ behavior: "smooth" });
+                proj.style='scroll-margin-top: -2px';
+                proj.scrollIntoView({ behavior: "smooth" });
 
                 detenerIntervalo();
                 activo = false;
 
+                paginador();
+
                 console.log(`se cargó todo en el proyecto: ${project.title}`);
                     // Evaluamos si el proyecto posee link
-                    if (project.link == ""){
+                    if (project.link == ''){
                         document.getElementById('linkIcon').style.display = 'none';
                     } else {
                         document.getElementById('linkIcon').style.display = '';
@@ -470,7 +473,7 @@
                 // En caso de error en alguna imagen, mostramos el contenido de todas formas
                 const temp = document.createElement('div');
                 temp.innerHTML = proyecto;
-                document.getElementById('project').replaceChildren(...temp.childNodes);
+                proj.replaceChildren(...temp.childNodes);
 
                 detenerIntervalo();
                 activo = false;
@@ -492,7 +495,7 @@
             if (!isNaN(projectId) && projectId.trim() !== '') {
                 // Posicionamos el scroll al inicio del contenedor de proyecto
                 // antes de cargar el nuevo proyecto
-                document.getElementById('project').scrollIntoView({ behavior: "smooth" });
+                document.getElementById('project').scrollIntoView({ behavior: 'smooth' });
                 // Cargar el proyecto correspondiente
                 getProject(projectId);
             }
@@ -517,8 +520,8 @@
         if (openProject) {
         const projectElement = document.getElementById(openProject);
             if (projectElement) {
-                projectElement.style="scroll-margin-top: 20px;";
-                projectElement.scrollIntoView({ behavior: "smooth" });
+                projectElement.style='scroll-margin-top: 20px';
+                projectElement.scrollIntoView({ behavior: 'smooth' });
             }
         }
     };
@@ -542,15 +545,16 @@
     let indice = 0;
     let intervaloID = null; // para guardar el ID del setInterval
     let activo = false; // esto controla si está encendido o apagado
+    const fColor = document.getElementById('fondo-color');
 
     function iniciarIntervalo() {
         if (intervaloID === null) { // prevenir múltiples intervalos superpuestos
             // Cambiar color inmediatamente
-            document.getElementById('fondo-color').style.backgroundColor = colores[indice];
+            fColor.style.backgroundColor = colores[indice];
             indice = (indice + 1) % colores.length;
             // Después arrancar el intervalo
             intervaloID = setInterval(() => {
-            document.getElementById('fondo-color').style.backgroundColor = colores[indice];
+            fColor.style.backgroundColor = colores[indice];
             //document.body.style.backgroundColor = colores[indice];
             indice = (indice + 1) % colores.length;
             }, 3000);
@@ -560,16 +564,16 @@
     function detenerIntervalo() {
         clearInterval(intervaloID);
         intervaloID = null; // reiniciar
-        document.getElementById('fondo-color').style.display = "none";
+        fColor.style.display = "none";
     }
 
     document.getElementById('color').addEventListener("click", () => {
         if (!activo) {
-            document.getElementById('fondo-color').style.display = "block";
+            fColor.style.display = "block";
             openProject=false;
             iniciarIntervalo();
         } else {
-            document.getElementById('fondo-color').style.display = "none";
+            fColor.style.display = "none";
             detenerIntervalo();
         }
         activo = !activo; // alterna entre true/false
