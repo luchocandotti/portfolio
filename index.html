@@ -88,7 +88,7 @@
                                 <td class="text-end pe-0">20%</td>
                               </tr>
                             </tbody>
-                          </table>
+                        </table>
                     </div>
                     <div class="col-12 col-md-6 text-md-0 h6 lh-base">
                         <h2 class="h5 pb-3 fw-light">Idiomas</h3>
@@ -107,7 +107,7 @@
                                 <td class="text-end pe-0">75%</td>
                               </tr>
                             </tbody>
-                          </table>
+                        </table>
                     </div>
                 </div>
             </section>
@@ -116,6 +116,17 @@
 
     <!-- contenedor de proyecto abierto ----------------------------------------------------------------------------------- -->
     <section id="project"></section>
+    <section id="call" class="d-none">
+        <div class="container">
+            <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center bg-dark text-light p-5 margCall bgCall">
+                <h3 id="txtCall" class="mb-0 text-center text-lg-start m-lg-0 mb-4">Llamado a la acción</h3>
+                <button class="btn btn-light rounded-pill px-4 d-flex justify-content-center align-items-center" type="button">
+                    <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i>
+                    <span id="btnCall" class="mb-0">Agendar llamada</span>
+                </button>
+            </div>
+        </div>
+    </section>
     <section id="galeria">
         <!-- Header de la sección con el filtro -->
         <header class="container text-end mb-3">
@@ -332,7 +343,10 @@
             btnNext.classList.remove('d-block');
             btnNext.classList.add('d-none');
         };
-    }
+    };
+
+    // Call
+    const call = document.getElementById('call');
 
     // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------------------------- //
 
@@ -438,7 +452,7 @@
                     </div>
                 </div>
                     ${/* falta una forma de cerrar el proyecto que sea piola */''}
-                    <div class="row pb-3">
+                    <div class="row">
                         ${imgInsert}
                     </div>
                 </div>
@@ -449,6 +463,8 @@
                 .then(() => {
                 // Todas las imágenes se han cargado, actualizamos el contenido y navegamos
                 const temp = document.createElement('div');
+
+
                 temp.innerHTML = proyecto;
                 proj.replaceChildren(...temp.childNodes);
 
@@ -461,6 +477,25 @@
 
                 paginador();
 
+                if (project.call){
+                    const txtCall = document.getElementById('txtCall');
+                    const btnCall = document.getElementById('btnCall');
+
+                    txtCall.innerText = project.call;
+                    btnCall.innerText = project.btnCall;
+
+                    btnCall.addEventListener('click', function() {
+                        const mensaje = `Hola, estuve mirando el proyecto ${project.title} y tengo una consulta`;
+                        const url = `https://wa.me/+5493765252764?text=${encodeURIComponent(mensaje)}`;
+                        window.open(url, '_blank');
+                    });
+                    call.classList.remove('d-none');
+                    call.classList.add('d-block');
+                } else {
+                    call.classList.remove('d-block');
+                    call.classList.add('d-none');
+                }
+                
                 console.log(`se cargó todo en el proyecto: ${project.title}`);
                     // Evaluamos si el proyecto posee link
                     if (project.link == ''){
@@ -515,6 +550,9 @@
         
         document.getElementById('floating-button').classList.remove('d-block');
         document.getElementById('floating-button').classList.add('d-none');
+
+        call.classList.remove('d-block');
+        call.classList.add('d-none');
 
         // Volver el scroll al último proyecto abierto
         if (openProject) {

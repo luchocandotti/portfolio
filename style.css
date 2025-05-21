@@ -72,6 +72,9 @@ p{
 #tabla{
     font-weight: 300;
 }
+.margCall{
+    margin-bottom: 40px;
+}
 
 .hover, .hover img {
   transition: all 0.5s ease;
@@ -127,6 +130,24 @@ video::-webkit-media-controls-presentation-mode-button {
     .bg-linear{
         display:block;
     }
+    #txtCall {
+         width: 100%;
+    }
+}
+
+
+/* Pantallas medianas (entre móvil y desktop) */
+@media (max-width: 767px) {
+  #txtCall {
+    width: 100%; /* O el valor que necesites para pantallas medianas */
+  }
+}
+
+/* Pantallas grandes */
+@media (min-width: 768px) {
+  #txtCall {
+    width: 60%;
+  }
 }
 
 /* Estilos para dispositivos grandes (lg y superiores)
