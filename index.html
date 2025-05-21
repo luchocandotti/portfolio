@@ -483,9 +483,11 @@
 
                     txtCall.innerText = project.call;
                     btnCall.innerText = project.btnCall;
+                    btnCall.setAttribute('data-title', project.title);
 
                     btnCall.addEventListener('click', function() {
-                        const mensaje = `Hola, estuve mirando el proyecto ${project.title} y tengo una consulta`;
+                        const title = btnCall.getAttribute('data-title');
+                        const mensaje = `Hola, estuve viendo el proyecto ${title} y tengo una consulta`;
                         const url = `https://wa.me/+5493765252764?text=${encodeURIComponent(mensaje)}`;
                         window.open(url, '_blank');
                     });
