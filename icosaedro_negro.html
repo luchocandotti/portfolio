@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Icosaedro girando con degradado</title>
+  <style>
+    body { margin: 0; background: #FFF; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    renderer.setClearColor(0xffffff); // Fondo blanco
+
+    // --- Parte nueva: Crear la textura de degradado ---
+    const gradientCanvas = document.createElement('canvas');
+    gradientCanvas.width = 1; // Un solo pixel de ancho para un degradado vertical u horizontal
+    gradientCanvas.height = 256; // Suficientes píxeles para una transición suave
+    const ctx = gradientCanvas.getContext('2d');
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, gradientCanvas.height);
+    gradient.addColorStop(0, '#000000'); // Color de inicio (azul oscuro)
+    gradient.addColorStop(1, '#000000'); // Color final (verde brillante)
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, gradientCanvas.width, gradientCanvas.height);
+
+    const gradientTexture = new THREE.CanvasTexture(gradientCanvas);
+    gradientTexture.needsUpdate = true; // Asegura que la textura se actualice
+
+    // Luz ambiental (menos crítica si usas MeshBasicMaterial, pero útil con otros materiales)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+    // Para un degradado basado en textura con MeshBasicMaterial, la luz direccional no es estrictamente necesaria
+    // ya que MeshBasicMaterial no reacciona a las luces. Si usas MeshPhongMaterial, sí es necesaria.
+    // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    // directionalLight.position.set(5, 5, 5);
+    // scene.add(directionalLight);
+
+    // Icosaedro
+    const geometry = new THREE.IcosahedronGeometry(2, 0);
+
+    // --- ¡CAMBIO AQUÍ! Usando MeshBasicMaterial o MeshPhongMaterial con la textura ---
+    // Opción 1: MeshBasicMaterial (sin interacción con luces, el degradado es el color principal)
+    const material = new THREE.MeshBasicMaterial({
+      map: gradientTexture, // Aplica la textura al material
+      // flatShading: true // Puedes mantener esto si quieres el aspecto facetado
+    });
+
+    // Opción 2: MeshPhongMaterial (con interacción con luces, el degradado se "ilumina")
+    /*
+    const material = new THREE.MeshPhongMaterial({
+      map: gradientTexture, // Aplica la textura como color difuso
+      specular: 0xffffff, // Brillo especular blanco
+      shininess: 70,      // Brillo
+      // flatShading: true
+    });
+    // Si usas MeshPhongMaterial, asegúrate de que las luces estén activas (las que comenté arriba)
+    */
+
+
+    const icosahedron = new THREE.Mesh(geometry, material);
+    scene.add(icosahedron);
+
+    camera.position.z = 6;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      icosahedron.rotation.y += 0.01;
+      // icosahedron.rotation.x += 0.005;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
