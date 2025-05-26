@@ -116,6 +116,7 @@
 
     <!-- contenedor de proyecto abierto ----------------------------------------------------------------------------------- -->
     <section id="project"></section>
+   <!-- bottom de proyecto con llamada a la acción ------------------------------------------------------------------------ -->
     <section id="call" class="d-none">
         <div class="container">
             <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center bg-dark text-light p-5 margCall bgCall">
@@ -130,13 +131,71 @@
     <section id="galeria">
         <!-- Header de la sección con el filtro -->
         <header class="container text-end mb-3">
-            <select id="categoryFilter" class="form-select focus-custom rounded-0" aria-label="Filtro">
-            </select>
+            <select id="categoryFilter" class="form-select focus-custom rounded-0"></select>
         </header>
         
         <!-- Contenedor de la galería de proyectos -->
         <div id="output"></div>
     </section>
+
+    <!-- contenedor de blog ----------------------------------------------------------------------------------- -->
+    <section id="blog">
+        <div class="container mb-5">
+            <div class="accordion" id="blog">
+                <div class="accordion-item rounded-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed rounded-0 accordion-custom" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            <span class="me-3">Instagram + PedidosYa: ¿Por qué no es suficiente para hacer crecer tu negocio?</span>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#blog">
+                        <div class="accordion-body">
+                        <strong>Utilizás las plataformas familiares para la mayoría de tus clientes porque es la vía más rápida y confiable</strong>  de hacer ventas, pero tuviste en cuenta que:
+                            <ul>
+                                <li>PedidosYa se queda con 20-30% de comisión en cada venta</li>
+                                <li>No tenés los datos de tus clientes (emails, teléfonos) para fidelizarlos</li>
+                                <li>Dependés 100% de algoritmos de terceros</li>
+                                <li>No podés hacer promociones directas sin pagar extra</li>
+                                <li>Cero control sobre tu marca y presentación</li>
+                            </ul>
+                        Tu web no tiene que procesar necesariamente pagos online si creés que esto sería un impedimento en la venta a la hora de ingresar datos sensibles (como una tarjeta de crédito). Podés en cambio:
+                            <ul>
+                                <li>Catálogo online profesional con botón 'Pedir por WhatsApp'</li>
+                                <li>Sistema de reservas/pedidos que se confirmen por teléfono</li>
+                                <li>Integración con MercadoPago (que la gente ya conoce y confía) que te retiene entre 0 y 6,30% según el método de cobro y el plazo en que el vendedor elige disponer del dinero</li>
+                            </ul>
+                        Así tenés independencia de PedidosYa, profesionalismo, y mantenés la confianza del pago reconocido.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed rounded-0 accordion-custom" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            <span class="me-3">¿Es necesario que mi emprendimiento tenga una marca gráfica?</span>
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#blog">
+                        <div class="accordion-body">
+                            <strong>This is the second item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item rounded-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed rounded-0 accordion-custom" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            <span class="me-3">¿Cuál es el valor agregado de tener un sitio web propio?</span>
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#blog">
+                        <div class="accordion-body">
+                            <strong>This is the third item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div id="fondo-color"></div>
 
     <div id="floating-button" class="position-fixed bottom-0 start-50 translate-middle-x mb-4 d-flex gap-3 d-none">
@@ -149,7 +208,7 @@
     
    <script>
 
-    let category = '';
+    let category = 'destacado';
     let filtro = false;
     let openProject;
     let limite = 0;
@@ -170,8 +229,9 @@
     /* Esta función se debe ejecutar después de cargar el JSON
     Lo que hace es leer todas las categorías presentes en el JSON y hacer una lista para ponerla dentro del desplegable <select> */
     function generarSelectorCategorias(data) {
-        // Guardar la selección actual
-        const seleccionActual = document.getElementById('categoryFilter').value;
+    // Guardar la selección actual O usar la categoría inicial si no hay selección previa
+    const seleccionActual = categoryFilter.value || category;
+    
         // Crear un conjunto para almacenar categorías únicas
         const categoriasUnicas = new Set();
         
@@ -194,14 +254,17 @@
         ).join('');
         
         // Crear la opción "Todos los proyectos"
-        const opcionTodos = '<option value="" selected>Todos los proyectos</option>';
+        const opcionTodos = '<option value="">Todos los proyectos</option>';
         
         // Actualizar el HTML del select
-        document.getElementById('categoryFilter').innerHTML = opcionTodos + opcionesHTML;
+        categoryFilter.innerHTML = opcionTodos + opcionesHTML;
         // Establecer la selección anterior
-        document.getElementById('categoryFilter').value = seleccionActual;
+        categoryFilter.value = seleccionActual;
     }
 
+    const categoryFilter = document.getElementById('categoryFilter');
+
+    
     // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS ------------------------------------------------------------------------- //
     function getGrilla() {
         fetch('post.json')
@@ -284,8 +347,10 @@
                 document.getElementById('output').replaceChildren(...temp.childNodes);
 
                 if (filtro === true){
-                    document.getElementById('categoryFilter').scrollIntoView({ behavior: "smooth" });
-                    filtro = false; // Resetear la bandera para futuras acciones
+                    setTimeout(() => {
+                        categoryFilter.scrollIntoView({ behavior: "smooth" });
+                    }, 100); // Pequeño delay para asegurar que todo esté renderizado
+                    filtro = false;
                 }
 
                 console.log('se cargó todo en la galeria');
@@ -300,7 +365,7 @@
     };
 
     // Cambio al selector de categorías
-    document.getElementById('categoryFilter').addEventListener('change', function() {
+    categoryFilter.addEventListener('change', function() {
         // Actualizar la variable category con el valor seleccionado
         category = this.value;
         console.log('Categoría seleccionada:', category);
