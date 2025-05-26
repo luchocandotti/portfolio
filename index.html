@@ -211,7 +211,7 @@
     let category = 'destacado';
     let filtro = false;
     let openProject;
-    let limite = 0;
+    const limite = [];
     getGrilla();
 
     // Convertimos en Array los datos de Category dentro del JSON
@@ -264,7 +264,7 @@
 
     const categoryFilter = document.getElementById('categoryFilter');
 
-    
+
     // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS ------------------------------------------------------------------------- //
     function getGrilla() {
         fetch('post.json')
@@ -299,8 +299,7 @@
                 col-md-6 separa la grilla en 3 en pantalla mediana, y en pequeño se apila todo a 1 columna
                 img-fluid es para que sea flexbox  */
                 const imgPath = `./img/${post.id}/1.jpg`;
-                limite ++;
-                console.log(limite);
+                limite.push(Number(post.id));
 
                 output += `
                     <div id="${post.id}" class="col-lg-4 col-md-6 pb-4">
@@ -353,6 +352,7 @@
                     filtro = false;
                 }
 
+                console.log(limite);
                 console.log('se cargó todo en la galeria');
                 })
                 .catch(() => {
@@ -372,6 +372,8 @@
     
         // Volver a ejecutar getGrilla para actualizar la visualización
         filtro = true;
+        limite.splice(0, limite.length);
+        console.log(limite);
         getGrilla();
     });
 
@@ -380,34 +382,39 @@
     const btnPrev = document.getElementById('floating-button-prev');
     const btnX = document.getElementById('floating-button-x');
     const btnNext = document.getElementById('floating-button-next');
-
     // Cargar proyecto anterior (ID actual - 1)
     btnPrev.addEventListener('click', function() {
-        let prev = Number(openProject)+1;
-        getProject(String(prev));
+        let currentIndex = openProject;
+        let prevProjectId = limite[currentIndex - 1];
+        getProject(String(prevProjectId));
     });
     // Cerrar proyecto
     btnX.addEventListener('click', getClose);
-    // Cargar proyecto anterior (ID actual + 1)
+    // Cargar proyecto siguiente (ID actual + 1)
     btnNext.addEventListener('click', function() {
-        let next = Number(openProject)-1;
-        getProject(String(next));
+        let currentIndex = openProject;
+        let nextProjectId = limite[currentIndex + 1];
+        getProject(String(nextProjectId));
     });
 
     // Mostrar u ocultar btns según paginación
     function paginador(){
-        if (openProject < limite && openProject != 1) {
-            btnPrev.classList.remove('d-none');
-            btnPrev.classList.add('d-block');
-            btnNext.classList.remove('d-none');
-            btnNext.classList.add('d-block');
-        } else if (openProject == limite) {
-            btnPrev.classList.remove('d-block');
+        if (openProject === 0) {
             btnPrev.classList.add('d-none');
+            btnPrev.classList.remove('d-block');
         } else {
-            btnNext.classList.remove('d-block');
+            btnPrev.classList.add('d-block');
+            btnPrev.classList.remove('d-none');
+        }
+    
+        // Ocultar botón Next si estamos en el último elemento
+        if (openProject === limite.length - 1) {
             btnNext.classList.add('d-none');
-        };
+            btnNext.classList.remove('d-block');
+        } else {
+            btnNext.classList.add('d-block');
+            btnNext.classList.remove('d-none');
+        }
     };
 
     // Call
@@ -416,7 +423,8 @@
     // ESTA FUNCION CARGA EL PROYECYO (arriba de la galería) --------------------------------------------------------------- //
 
     function getProject(id) {
-        openProject = id;
+        openProject = limite.indexOf(Number(id));
+        console.log(openProject);
         // Actualizar la URL con el hash sin recargar la página
         history.pushState(null, null, `#${id}`);
 
