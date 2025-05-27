@@ -7,6 +7,7 @@ html, body {
     max-width: 100%;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    background-color: #000;
 }
 body{
     font-family: "Albert Sans", sans-serif;
@@ -14,37 +15,9 @@ body{
 }
 
 
-/* div con degradé para difuminar el corte en movil 
-#top{
-    display: none;
-}
-.bg-linear {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(#ffffff, #ffffff00);
-    z-index: 5;
-}
-*/
-#fondo-color {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #FFF;
-    display: none;
-    z-index: 3;
-    mix-blend-mode: multiply;
-    pointer-events: none;
-    transition: background-color 1s ease-in-out;
-}
-
 a {
     text-decoration: none;
-    color: #000;
+    color: #FFF;
     &:hover{
         text-decoration: underline;
     }
