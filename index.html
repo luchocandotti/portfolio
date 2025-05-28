@@ -625,6 +625,46 @@
         }
     }
 
+    // Cambiar el # del BLOG
+    /*document.addEventListener('DOMContentLoaded', function() {
+        // Cuando se muestra un elemento del acordeón
+        document.addEventListener('shown.bs.collapse', function(event) {
+            if (event.target.closest('.accordion')) {
+                window.location.hash = '#blog';
+                handleHashChange();
+            }
+        });
+        
+        // Cuando se oculta un elemento del acordeón
+        document.addEventListener('hidden.bs.collapse', function(event) {
+            if (event.target.closest('.accordion')) {
+                window.location.hash = '';
+                handleHashChange();
+            }
+        });
+    });*/
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', function() {
+                setTimeout(() => {
+                    const isCollapsed = this.classList.contains('collapsed');
+                    
+                    if (isCollapsed) {
+                        // Se está cerrando: quitar hash SIN hacer scroll
+                        history.replaceState(null, null, window.location.pathname + window.location.search);
+                    } else {
+                        // Se está abriendo: agregar #blog
+                        window.location.hash = '#blog';
+                    }
+                    
+                    // Ejecutar handleHashChange en ambos casos
+                    handleHashChange();
+                }, 150);
+            });
+        });
+    });
+
     // Cerramos el proyecto y volvemos a la galería------------------------------------------------------------------------ //
     function getClose(){
         // Actualizar la URL eliminando el hash sin recargar la página
