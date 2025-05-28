@@ -16,10 +16,14 @@
     <!-- Blog ------------------------------------------------------------------------------------------------------------ -->
     <section id="blog">
         <div class="container">
-            <header class="text-light pt-5 h4">
-                <a href="/"><i class="bi bi-arrow-bar-left me-2 text-secondary"></i>Luciano Candotti</a> 
-                <span class="text-secondary fw-light">/ blog</span>
-            </header>
+            <nav class="navbar navbar-dark fixed-top shadow-lg pt-4 pb-2 nav-custom">
+                <div class="container justify-content-start">
+                    <a class="navbar-brand me-2" href="/">
+                        <i class="bi bi-arrow-bar-left me-2 text-secondary"></i>Luciano Candotti
+                    </a>
+                    <span class="text-secondary fw-light">/ blog</span>
+                </div>
+            </nav>
             
             <h1 id="titulo" class="text-light pt-5">Instagram + PedidosYa: ¿Por qué no es suficiente para hacer crecer tu negocio?</h1>
             <h2 class="pt-3 text-light fw-light">Si tenés un emprendimiento gastronómico, seguramente ya estás usando Instagram para mostrar tus productos y PedidosYa para las ventas. Es lógico: son plataformas que tus clientes ya conocen y confían. Pero si querés hacer crecer tu negocio en serio, estas herramientas no son suficientes.</h2>
@@ -83,7 +87,7 @@
     const title = document.getElementById('titulo').innerHTML;
 
         btnCall.addEventListener('click', function() {
-            const mensaje = `Hola, estuve leyendo el blog sobre ${title} y me gustaría agendar una llamada para contarte sobre mi emprendimiento`;
+            const mensaje = `Hola, estuve leyendo el blog sobre '${title}' y me gustaría agendar una llamada para contarte sobre mi emprendimiento`;
             const url = `https://wa.me/+5493765252764?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
         });

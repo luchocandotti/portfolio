@@ -10,11 +10,14 @@ html, body {
     background-color: #000;
 }
 body{
+    padding-top: 30px;
     font-family: "Albert Sans", sans-serif;
     font-size: 14px;
 }
 
-
+.text-blog:hover{
+    text-decoration: none;
+}
 a {
     text-decoration: none;
     color: #FFF;
@@ -26,6 +29,10 @@ a {
 p {
     font-weight: 300;
 }
+.nav-custom{
+    background-color: #000000eb;
+}
+
 
 .cursor {
     animation-name: anim;

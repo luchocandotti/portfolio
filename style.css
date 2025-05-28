@@ -158,6 +158,8 @@ video::-webkit-media-controls-presentation-mode-button {
 .accordion-text{
     font-weight: 300;
 }
+/*-----*/
+
 
 @media(max-width:576px) {
     .container {
