@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -10,7 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
+    <meta property="og:title" content="Luciano Candotti"/>
+    <meta property="og:url" content="https://www.lcandotti.com"/>
+    <meta property="og:image" content="https://www.lcandotti.com/folio.jpg"/>
+    <meta property="og:description" content="Me especializo en Branding y Desarrollo Front-End, este último como diferencial, pues implemento en código mi habilidad estética."/>
 </head>
 <body>
     <!-- intro ------------------------------------------------------------------------------------------------------------ -->
@@ -204,8 +208,6 @@
             <button type="button" id="floating-button-x" class="col btn btn-dark rounded-circle shadow-lg"><i class="bi bi-x-lg" style="font-size: 1.5rem;"></i></button>
             <button type="button" id="floating-button-next" class="col btn btn-dark rounded-circle shadow-lg"><i class="bi bi-arrow-right" style="font-size: 1.5rem;"></i></button>
     </div>
-
-    
     
    <script>
 
@@ -625,25 +627,6 @@
         }
     }
 
-    // Cambiar el # del BLOG
-    /*document.addEventListener('DOMContentLoaded', function() {
-        // Cuando se muestra un elemento del acordeón
-        document.addEventListener('shown.bs.collapse', function(event) {
-            if (event.target.closest('.accordion')) {
-                window.location.hash = '#blog';
-                handleHashChange();
-            }
-        });
-        
-        // Cuando se oculta un elemento del acordeón
-        document.addEventListener('hidden.bs.collapse', function(event) {
-            if (event.target.closest('.accordion')) {
-                window.location.hash = '';
-                handleHashChange();
-            }
-        });
-    });*/
-
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.accordion-button').forEach(button => {
             button.addEventListener('click', function() {
@@ -655,7 +638,7 @@
                         history.replaceState(null, null, window.location.pathname + window.location.search);
                     } else {
                         // Se está abriendo: agregar #blog
-                        window.location.hash = '#blog';
+                        window.location.hash = 'blog';
                     }
                     
                     // Ejecutar handleHashChange en ambos casos
@@ -756,7 +739,6 @@
             }
         });
     });
-
 
    </script>
 
