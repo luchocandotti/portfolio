@@ -29,7 +29,7 @@
     <!-- about ------------------------------------------------------------------------------------------------------------- -->
             <section class="row mb-3">
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
-                    <p>Mi método es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve todo más atractivo, sino que reduce la fricción <span class="fw-semibold">[UI-UX]</span> entre usuario y aplicación: maximizando la usabilidad que resultará en mejores relaciones del usuario con el producto-servicio.</p>
+                    <p>Mi método es la <span class="fw-semibold">claridad para abordar problemas complejos con soluciones simples</span> <span class="fst-italic">a primera vista.</span> Esto, respaldado por un control estético que no sólo vuelve todo más atractivo, sino que reduce la fricción <span class="fw-semibold">(UI-UX)</span> entre usuario y aplicación: maximizando la usabilidad que resultará en una mejor relación del usuario con el producto/servicio.</p>
                 </div>
                 <div class="col-12 col-md-6 mb-md-0 h6 lh-base">
                     <p>Manejo <span class="fw-semibold">HTML | CSS | Javascript Nativos:</span> lo que me permite realizar sitios web dinámicos completamente customizables. Así mismo utilizo librerías como <span class="fw-semibold">Bootstrap,</span> para cuando el tiempo es poco y no se puede comprometer la calidad gráfica.</p>
@@ -135,9 +135,29 @@
         <div id="output"></div>
     </section>
 
+<!-- VER TODOS LOS PROYECTOS ------------------------------------------------------------------------ -->
+    <section>
+        <div id="botoneraTodo" class="container d-block">
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <button id="verTodo" class="btn btn-dark rounded-pill px-4 d-flex justify-content-center align-items-center d-block" type="button">
+                    <i class="bi bi-arrow-down-up me-2" style="font-size: 1.3rem;"></i>
+                    <span id="btnTodo" class="mb-0">Ver todos los proyectos</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- contenedor de blog ----------------------------------------------------------------------------------- -->
     <section id="blog">
         <div class="container mb-5">
+            <header class="d-flex justify-content-between">
+                <h4 class="text-dark pb-4"><i class="bi bi-border-width me-3"></i>Blog</h2>
+                <ul class="d-flex list-unstyled h4">
+                    <a href="https://wa.me/+5493765252764?text=Hola, vi tu portfolio y tengo una consulta" target="_blank"><li><i class="bi bi-whatsapp me-4 social"></i></li></a>
+                    <a href="https://instagram.com/luciano.candotti" target="_blank"><li><i class="bi bi-instagram me-4 social"></i></li></a>
+                    <a href="https://github.com/luchocandotti" target="_blank"><li><i class="bi bi-github social"></i></li></a>
+                </ul>
+            </header> 
             <div class="accordion" id="blog">
                 <!-- BLOG 1 -->
                 <div class="accordion-item rounded-0">
@@ -266,6 +286,8 @@
     }
 
     const categoryFilter = document.getElementById('categoryFilter');
+    const btnTodo = document.getElementById('btnTodo');
+    const botoneraTodo = document.getElementById('botoneraTodo');
 
 
     // ESTA FUNCION CARGA LA GRILLA DE PROYECTOS ------------------------------------------------------------------------- //
@@ -286,10 +308,14 @@
             const dataFiltrada = data.filter(post => {
                 // Si el filtro está vacío (''), devolver todos los elementos
                 if (category === '') {
+                    botoneraTodo.classList.remove('d-block');
+                    botoneraTodo.classList.add('d-none');
                     return true; // Esto se llama retorno temprano, para evitar cálculos innecesarios. Todo lo que sigue en la function no se ejecuta
                 }
                 /* Solo cuando category tiene un valor, necesitamos hacer el trabajo adicional de parsear la cadena y verificar si incluye la categoría buscada. */
                 const categorias = parseCategories(post.category);
+                botoneraTodo.classList.remove('d-none');
+                botoneraTodo.classList.add('d-block');
                 // Verifica si la categoría que buscamos está en el array
                 return categorias.includes(category);
             });
@@ -406,6 +432,11 @@
     btnNext.addEventListener('click', function() {
         let nextProjectId = limite[openProject + 1];
         getProject(String(nextProjectId));
+    });
+    btnTodo.addEventListener('click', function() {
+        category = '';
+        categoryFilter.value = '';
+        getGrilla();
     });
 
     // Mostrar u ocultar btns según paginación

@@ -127,6 +127,12 @@ video::-webkit-media-controls-presentation-mode-button {
 }
 
 /* ACORDEON -------------------------------------------------------------------*/
+.social {
+    color: #c0c0c0;
+    &:hover{
+        color: #000;
+    }
+}
 .accordion-custom {
     transition: all 0.5s ease;
 }
@@ -160,6 +166,7 @@ video::-webkit-media-controls-presentation-mode-button {
 }
 
 /*-----*/
+
 
 
 @media(max-width:576px) {
