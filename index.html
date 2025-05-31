@@ -234,7 +234,8 @@
     let category = 'destacado';
     let filtro = false;
     let openProject;
-    const limite = [];
+    let close;
+    let limite = [];
     getGrilla();
 
     // Convertimos en Array los datos de Category dentro del JSON
@@ -402,7 +403,6 @@
         // Volver a ejecutar getGrilla para actualizar la visualización
         filtro = true;
         limite.splice(0, limite.length);
-        console.log(limite);
         getGrilla();
     });
 
@@ -433,10 +433,18 @@
         let nextProjectId = limite[openProject + 1];
         getProject(String(nextProjectId));
     });
-    btnTodo.addEventListener('click', function() {
+    /* btnTodo.addEventListener('click', function() {
+        //acá debería utilizar el desplegable para colocar la categoria '' en vez de renombrar todo
         category = '';
         categoryFilter.value = '';
+        limite = [];
         getGrilla();
+    }); */
+    btnTodo.addEventListener('click', function() {
+        // Cambiar el valor del selector
+        categoryFilter.value = '';
+        // Disparar el evento 'change' del selector para que ejecute su lógica
+        categoryFilter.dispatchEvent(new Event('change'));
     });
 
     // Mostrar u ocultar btns según paginación
@@ -466,7 +474,7 @@
 
     function getProject(id) {
         openProject = limite.indexOf(Number(id));
-        console.log(openProject);
+        close = id;
         // Actualizar la URL con el hash sin recargar la página
         history.pushState(null, null, `#${id}`);
 
@@ -613,7 +621,7 @@
 
                 paginador();
                 
-                console.log(`se cargó todo en el proyecto: ${project.title}`);
+                console.log(`se cargó todo en el proyecto número ${id}: ${project.title} que esá posicionado en el index ${openProject} del array de ${category}`);
                     // Evaluamos si el proyecto posee link
                     if (project.link == ''){
                         document.getElementById('linkIcon').style.display = 'none';
@@ -693,8 +701,8 @@
         call.classList.add('d-none');
 
         // Volver el scroll al último proyecto abierto
-        if (openProject) {
-        const projectElement = document.getElementById(openProject);
+        if (close) {
+        const projectElement = document.getElementById(close);
             if (projectElement) {
                 projectElement.style='scroll-margin-top: 20px';
                 projectElement.scrollIntoView({ behavior: 'smooth' });
