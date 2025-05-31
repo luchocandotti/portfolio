@@ -116,7 +116,7 @@
    <!-- bottom de proyecto con llamada a la acción ------------------------------------------------------------------------ -->
     <section id="call" class="d-none">
         <div class="container">
-            <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center bg-dark text-light p-5 margCall bgCall mb-4">
+            <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center bg-dark text-light p-5 mbCall">
                 <h3 id="txtCall" class="mb-0 text-center text-lg-start m-lg-0 mb-4">Llamado a la acción</h3>
                 <button class="btn btn-light btn-wasap rounded-pill px-4 d-flex justify-content-center align-items-center" type="button">
                     <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i>
@@ -621,7 +621,7 @@
 
                 paginador();
                 
-                console.log(`se cargó todo en el proyecto número ${id}: ${project.title} que esá posicionado en el index ${openProject} del array de ${category}`);
+                console.log(`se cargó todo en el proyecto número ${id}: ${project.title} que esá posicionado en el index ${openProject} del array de ${category}''`);
                     // Evaluamos si el proyecto posee link
                     if (project.link == ''){
                         document.getElementById('linkIcon').style.display = 'none';
@@ -646,25 +646,55 @@
     };
 
     // Función para manejar cambios en el hash de la URL------------------------------------------------------------------- //
-    function handleHashChange() {
+    /*function handleHashChange() {
         const hash = window.location.hash;
         if (hash) {
             // Extraer el ID del hash (eliminando el símbolo #)
             const projectId = hash.substring(1);
-            // Verificar que el ID sea un número
-            if (!isNaN(projectId) && projectId.trim() !== '') {
-                // Posicionamos el scroll al inicio del contenedor de proyecto
-                // antes de cargar el nuevo proyecto
-                document.getElementById('project').scrollIntoView({ behavior: 'smooth' });
-                // Cargar el proyecto correspondiente
-                getProject(projectId);
+            console.log(projectId);
+                if (hash==='blog'){
+                    document.getElementById('blog').scrollIntoView({ behavior: 'smooth' });
+                    getClose();
+                } else if (!isNaN(projectId) && projectId.trim() !== '') { // Verificar que el ID sea un número
+                    // Posicionamos el scroll al inicio del contenedor de proyecto
+                    // antes de cargar el nuevo proyecto
+                    document.getElementById('project').scrollIntoView({ behavior: 'smooth' });
+                    // Cargar el proyecto correspondiente
+                    getProject(projectId);
+                }
+                } else {
+                // Si no hay hash, significa que estamos en la landing
+                // Cerrar el proyecto abierto
+                getClose();
+                }
+    }*/
+
+    function handleHashChange() {
+    const hash = window.location.hash;
+        if (hash) {
+            // Extraer el ID del hash (eliminando el símbolo #)
+            let hashValue = hash.substring(1);
+            
+            if (hashValue === 'blog') {
+                document.getElementById('blog').scrollIntoView({ behavior: 'smooth' });
+                close = '';
+                getClose(hashValue);
+            } else {
+                // Verificar que el ID sea un número para proyectos
+                if (!isNaN(hashValue) && hashValue.trim() !== '') {
+                    // Posicionamos el scroll al inicio del contenedor de proyecto
+                    // antes de cargar el nuevo proyecto
+                    document.getElementById('project').scrollIntoView({ behavior: 'smooth' });
+                    // Cargar el proyecto correspondiente
+                    getProject(hashValue);
+                }
             }
         } else {
-        // Si no hay hash, significa que estamos en la landing
-        // Cerrar el proyecto abierto
-        getClose();
+            // Si no hay hash, significa que estamos en la landing
+            // Cerrar el proyecto abierto
+            getClose();
         }
-    }
+    };
 
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.accordion-button').forEach(button => {
@@ -688,10 +718,12 @@
     });
 
     // Cerramos el proyecto y volvemos a la galería------------------------------------------------------------------------ //
-    function getClose(){
-        // Actualizar la URL eliminando el hash sin recargar la página
-        history.pushState(null, null, window.location.pathname);
-
+    function getClose(hashValue){
+            // Actualizar la URL eliminando el hash sin recargar la página
+            if (hashValue !== 'blog'){
+                console.log('borramos el #');
+                history.pushState(null, null, window.location.pathname);
+            }
         document.getElementById('project').replaceChildren();
         
         document.getElementById('floating-button').classList.remove('d-block');

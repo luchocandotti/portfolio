@@ -125,6 +125,9 @@ p {
 video::-webkit-media-controls-presentation-mode-button {
     display: none !important;
 }
+.mbCall {
+    margin-bottom: 40px;
+}
 
 /* ACORDEON -------------------------------------------------------------------*/
 .social {
