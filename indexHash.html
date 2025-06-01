@@ -336,7 +336,7 @@
                         <div class="card bg-light px-3 shadow-lg rounded-0 hover">
                             <h3 class="fs-4 text-dark pt-3 pb-2">${post.title}</h3>
                             <div class="overflow-hidden">
-                                <a href="javascript:void(close='${post.id}', getProject('${post.id}'))">
+                                <a href="javascript:getProject('${post.id}')">${/* acá es donde elegimos qué proyecto deseamos cargar*/''}
                                    <img class="img-fluid rounded-0" src="./img/${post.id}/1.jpg">
                                 </a>
                             </div>
@@ -474,9 +474,9 @@
 
     function getProject(id) {
         openProject = limite.indexOf(Number(id));
+        close = id;
         // Actualizar la URL con el hash sin recargar la página
         history.pushState(null, null, `#${id}`);
-        console.log(close);
 
         fetch('post.json')
         .then((res) => res.json())
@@ -645,49 +645,81 @@
         });
     };
 
-    // manejamos el #
     function handleHashChange() {
-    const hash = window.location.hash;
-        if (hash) {
-            // Extraer el ID del hash (eliminando el símbolo #)
-            let hashValue = String(hash.substring(1));
-            // Verificar que el ID sea un número para proyectos
-            if (!isNaN(hashValue) && hashValue.trim() !== '') {
-                // Posicionamos el scroll al inicio del contenedor de proyecto
-                // antes de cargar el nuevo proyecto
-                document.getElementById('project').scrollIntoView({ behavior: 'smooth' });
-                // Cargar el proyecto correspondiente
-                getProject(hashValue);
-            }
-        }
-    };
-
-
-    // Cerramos el proyecto y volvemos a la galería------------------------------------------------------------------------ //
-    function getClose(){
-        //borramos el #
-        history.pushState(null, null, window.location.pathname);
-
-        document.getElementById('project').replaceChildren();
+        // ACTUALIZAR la variable hash cada vez que se ejecuta la función
+        const hash = String(window.location.hash.substring(1));
         
-        document.getElementById('floating-button').classList.remove('d-block');
-        document.getElementById('floating-button').classList.add('d-none');
-
-        call.classList.remove('d-block');
-        call.classList.add('d-none');
-
-        // Volver el scroll al último proyecto abierto
-        if (close) {
-        const projectElement = document.getElementById(close);
-            if (projectElement) {
-                projectElement.style='scroll-margin-top: 20px';
-                projectElement.scrollIntoView({ behavior: 'smooth' });
+        if (hash) {
+            if (hash === 'blog') {
+                close = null;
+                getClose('blog'); // Pasar 'blog' como parámetro
+            } else {
+                // Verificar que el ID sea un número para proyectos
+                if (!isNaN(hash) && hash.trim() !== '') {
+                    // Posicionamos el scroll al inicio del contenedor de proyecto
+                    // antes de cargar el nuevo proyecto
+                    document.getElementById('project').scrollIntoView({ behavior: 'smooth' });
+                    // Cargar el proyecto correspondiente
+                    getProject(hash);
+                }
             }
         } else {
-            console.log('cerré sin close');
-            document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Si no hay hash, significa que estamos en la landing
+            // Cerrar el proyecto abierto
+            getClose();
         }
-    };
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', function() {
+                setTimeout(() => {
+                    const isCollapsed = this.classList.contains('collapsed');
+                    if (isCollapsed) {
+                        // Se está cerrando: quitar hash SIN hacer scroll
+                        history.replaceState(null, null, window.location.pathname + window.location.search);
+                    } else {
+                        // Se está abriendo: agregar #blog
+                        window.location.hash = 'blog';
+                    }
+                    // Ejecutar handleHashChange en ambos casos
+                    handleHashChange();
+                }, 150);
+            });
+        });
+    });
+
+    // Cerramos el proyecto y volvemos a la galería------------------------------------------------------------------------ //
+    function getClose(currentHash = null) {
+        // Si no se pasa parámetro, obtener el hash actual
+        if (!currentHash) {
+            currentHash = String(window.location.hash.substring(1));
+        }
+        
+        // Actualizar la URL eliminando el hash sin recargar la página
+        if (currentHash !== 'blog') {
+            console.log('borramos el #');
+            history.pushState(null, null, window.location.pathname);
+        } else {
+            document.getElementById('blog').scrollIntoView({ behavior: 'smooth' });
+            console.log('llegue al blog');
+        }
+        
+        document.getElementById('project').replaceChildren();
+        document.getElementById('floating-button').classList.remove('d-block');
+        document.getElementById('floating-button').classList.add('d-none');
+        call.classList.remove('d-block');
+        call.classList.add('d-none');
+        
+        // Volver el scroll al último proyecto abierto
+        if (close) {
+            const projectElement = document.getElementById(close);
+            if (projectElement) {
+                projectElement.style = 'scroll-margin-top: 20px';
+                projectElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
 
     // Inicializar: verificar si hay un hash en la URL al cargar la página
     document.addEventListener('DOMContentLoaded', function() {
