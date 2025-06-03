@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -11,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
     <meta property="og:title" content="Luciano Candotti"/>
     <meta property="og:url" content="https://www.lcandotti.com"/>
     <meta property="og:image" content="https://www.lcandotti.com/folio.jpg"/>
@@ -228,8 +228,8 @@
             <button type="button" id="floating-button-x" class="col btn btn-dark rounded-circle shadow-lg"><i class="bi bi-x-lg" style="font-size: 1.5rem;"></i></button>
             <button type="button" id="floating-button-next" class="col btn btn-dark rounded-circle shadow-lg"><i class="bi bi-arrow-right" style="font-size: 1.5rem;"></i></button>
     </div>
-    
-   <script>
+
+    <script>
 
     let category = 'destacado';
     let filtro = false;
@@ -237,6 +237,21 @@
     let close;
     let limite = [];
     getGrilla();
+
+
+    //hacemos tipear la frase de inicio
+    /*function typer() {
+        const cadena = document.getElementById('color').innerText;
+        const cantidad = cadena.length-1;
+
+        for (let i = 0; i <= cantidad; i++) {
+            document.getElementById('color').innerText += cadena[i];
+            console.log(cadena.charAt(i));
+        }
+        console.log(cadena, cantidad);
+    }*/
+
+
 
     // Convertimos en Array los datos de Category dentro del JSON
     /* Se utiliza en dos intancias, primero se genera la lista de <select> y luego cada vez que se carga una categoría en la galería */
@@ -384,6 +399,7 @@
 
                 console.log(limite);
                 console.log('se cargó todo en la galeria');
+                typer();
                 })
                 .catch(() => {
                 // En caso de error en alguna imagen, mostramos el contenido de todas formas
@@ -476,7 +492,7 @@
         openProject = limite.indexOf(Number(id));
         // Actualizar la URL con el hash sin recargar la página
         history.pushState(null, null, `#${id}`);
-        console.log(close);
+        console.log(`el usuario eligió ${close} desde la grilla`);
 
         fetch('post.json')
         .then((res) => res.json())
@@ -658,7 +674,12 @@
                 document.getElementById('project').scrollIntoView({ behavior: 'smooth' });
                 // Cargar el proyecto correspondiente
                 getProject(hashValue);
-            }
+            } /*else if (hashValue === 'blog') {
+                //document.body.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                console.log('bajamos a blog');
+                document.getElementById('end').scrollIntoView({ behavior: 'smooth' });
+                //window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }*/
         }
     };
 
@@ -682,6 +703,7 @@
             if (projectElement) {
                 projectElement.style='scroll-margin-top: 20px';
                 projectElement.scrollIntoView({ behavior: 'smooth' });
+                close=null;
             }
         } else {
             console.log('cerré sin close');
