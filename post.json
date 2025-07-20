@@ -1,11 +1,25 @@
 [
   {
+    "id": "19",
+    "title": "Nüba",
+    "category": "[branding, audiovisual, redes, destacado]",
+    "date": "Andresito — Misiones [2025]",
+    "intro": "<span class='fw-semibold'>Nuba:</span><br>Identidad visual para pastelería artesanal",
+    "descript1": "<strong>Desafío:</strong> Crear una identidad visual desde cero para un emprendimiento de pastelería artesanal que combine la calidez rural con una estética contemporánea y aspiracional. El cliente buscaba una marca con personalidad coreana que se destacara en redes sociales y conectara emocionalmente con su audiencia.<br><br><strong>Método:</strong> Trabajamos de forma colaborativa: el cliente realizó bocetos a mano que reflejaban su visión, los cuales procesé con IA para desarrollar un símbolo con la estética coreana solicitada. Posteriormente, seleccioné una tipografía que armonizara con el símbolo creado y fuera coherente con el rubro gastronómico.",
+    "descript2": "<strong>Solución:</strong> La marca resultante combina lo artesanal con lo contemporáneo, reflejando la estética solicitada a través de líneas suaves y formas orgánicas. Creando una identidad cohesiva que mantiene la calidez de lo <i>hecho en casa</i> pero con una presencia visual sofisticada. El resultado funciona óptimamente en redes sociales y <i>packaging</i> personalizado, logrando ese equilibrio entre lo aspiracional y lo accesible que caracteriza a los productos horneados de alta calidad.",
+    "cant": "10",
+    "video": "1",
+    "call": "¿Tu emprendimiento necesita una identidad que conecte con tus clientes?",
+    "btnCall": "Creemos tu marca juntos",
+    "link": "instagr.am/espacionuba"
+  },
+  {
     "id": "18",
     "title": "Juventus",
     "category": "[branding, destacado]",
     "date": "Santa Fe — Santa Fe [2025]",
     "intro": "<span class='fw-semibold'>Gimnasio:</span><br>Rediseño de marca",
-    "descript1": "<strong>Desafío:</strong> La empresa contaba con una marca anticuada que no se destacaba entre la competencia. El gimnasio lucía descuidado, no generaba <i>engagement</i> con sus usuarios. El cliente pidió basándose en el nombre de la empresa, evocar juventud como resultado del cuidado personal por medio del ejercicio.<br><br><strong>Método:</strong> Opté por una marca sólo tipográfica, debido a que en el rubro <i>Gimnasio</i> se sobre-utilizaron elementos literales tales como siluetas de pesas o cuerpos haciendo fuerza.",
+    "descript1": "<strong>Desafío:</strong> Crear una identidad visual desde cero para un emprendimiento de pastelería artesanal que combine la calidez rural con una estética contemporánea y aspiracional. El cliente buscaba una marca con personalidad coreana que se destacara en redes sociales y conectara emocionalmente con su audiencia.<br><br><strong>Método:</strong> Trabajamos de forma colaborativa: el cliente realizó bocetos a mano que reflejaban su visión. Por primera vez me animé a usar IA para desarrollar el símbolo usando como base el boceto, pero el trabajo no estuvo completo hasta vectorizar manualmente el resultado, ya que ChatGPT aún no tiene la precisión del dibujo humano para crear vectores que funcionen en todos los formatos y sistemas de impresión. Posteriormente, seleccioné una tipografía que armonizara con el símbolo creado y fuera coherente con el rubro gastronómico.",
     "descript2": "<strong>Solución:</strong> Con la elección tipográfica y los ajustes ópticos, las líneas diagonales aportan movimiento y un estilo joven a la gráfica. Se asemeja a marcas de ropa deportiva (Nike por ejemplo) lo cual acelera el reconocimiento del rubro por asociación.",
     "cant": "12",
     "video": "",
@@ -226,7 +240,7 @@
   {
     "id": "2",
     "title": "McDonald",
-    "category": "[branding, destacado]",
+    "category": "[branding]",
     "date": "Puerto Rico — Misiones [2019]",
     "intro": "<strong>Mayorista de repuestos para motos:</strong><br>Rediseño de marca.",
     "descript1": "<strong>Desafío:</strong> Una empresa distribuidora de moto-partes necesitaba modernizar su identidad manteniendo el reconocimiento de marca entre sus distribuidores.<br><br><strong>Proceso:</strong> Analicé los puntos fuertes del símbolo original y rediseñé una evolución que mantiene su esencia mientras mejora aspectos técnicos de reproducibilidad y aplicación.",
