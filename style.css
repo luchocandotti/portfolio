@@ -33,12 +33,13 @@ body{
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
     background-color: #FFF;
     display: none;
     z-index: 3;
     mix-blend-mode: multiply;
     pointer-events: none;
+    transform: translateY(-10vh);
     transition: background-color 1s ease-in-out;
 }
 

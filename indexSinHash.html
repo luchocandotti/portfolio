@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
     <meta property="og:title" content="Luciano Candotti"/>
-    <meta property="og:url" content="https://www.lcandotti.com"/>
+    <meta property="og:url" content="https://www.lcandotti.com/indesinhash.html"/>
     <meta property="og:image" content="https://www.lcandotti.com/folio.jpg"/>
     <meta property="og:description" content="Me especializo en Branding y Desarrollo Front-End, este último como diferencial, pues implemento en código mi habilidad estética."/>
 </head>
@@ -362,13 +362,16 @@
     const call = document.getElementById('call');
     function getProject(id) {
         openProject = limite.indexOf(Number(id));
+
         history.pushState(null, null, `#${id}`);
+
         console.log(`el usuario eligió ${close} desde la grilla`);
         fetch('post.json')
         .then((res) => res.json())
         .then((data) => {
             const project = data.find(project => project.id === id);
             if (project) {
+                const ORIGIN = window.location.origin;
                 const proj = document.getElementById('project');
                 const botonera = document.getElementById('floating-button');
                 proj.scrollIntoView({ behavior: "smooth" });
@@ -381,7 +384,9 @@
                 if (project.video != '') {
                     const cantidad = project.cant - project.video;
                         if (img <= cantidad) {
-                        const imgPath = `./img/${project.id}/${img}.jpg`;
+                        const imgPath  = `${ORIGIN}/img/${project.id}/${img}.jpg`;
+                        console.log (`cargo ${imgPath}`);
+                        //    const imgPath = `./img/${project.id}/${img}.jpg`;
                         imgInsert += `<img class="img-fluid pb-4" src="${imgPath}">`;
                         const imagePromise = new Promise((resolve, reject) => {
                             const tempImg = new Image();
@@ -391,8 +396,8 @@
                         });
                         imagePromises.push(imagePromise);
                         } else {
-                        const videoPath = `./img/${project.id}/${img}.mp4`;
-                        const poster = `./img/${project.id}/${img}.jpg`;
+                        const videoPath = `${ORIGIN}/img/${project.id}/${img}.mp4`;
+                        const poster    = `${ORIGIN}/img/${project.id}/${img}.jpg`;
                         imgInsert += `<video class="w-100 pb-4" controls disablePictureInPicture controlsList="nodownload" playsinline poster="${poster}" src="${videoPath}"></video>`;
                         const videoPromise = new Promise((resolve, reject) => {
                             const tempVideo = document.createElement('video');
@@ -403,9 +408,10 @@
                             tempVideo.onerror = () => reject();
                             tempVideo.src = videoPath;
                         });
+                    imagePromises.push(videoPromise); 
                     }
                 } else {
-                    const imgPath = `./img/${project.id}/${img}.jpg`;
+                    const imgPath  = `${ORIGIN}/img/${project.id}/${img}.jpg`;
                     imgInsert += `<img class="img-fluid pb-4" src="${imgPath}">`;
                     const imagePromise = new Promise((resolve, reject) => {
                     const tempImg = new Image();
@@ -484,6 +490,8 @@
                 detenerIntervalo();
                 activo = false;
                 });
+
+            history.replaceState(null, "", `/proyecto/${id}/index.html`);
             }
         })
         .catch(error => {
