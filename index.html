@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <title>Luciano Candotti | Diseñador Gráfico, Desarrollador Front-End</title>
     <meta property="og:title" content="Luciano Candotti"/>
-    <meta property="og:url" content="https://www.lcandotti.com"/>
+    <meta property="og:url" content="https://www.lcandotti.com/indexSinHash.html"/>
     <meta property="og:image" content="https://www.lcandotti.com/folio.jpg"/>
     <meta property="og:description" content="Me especializo en Branding y Desarrollo Front-End, este último como diferencial, pues implemento en código mi habilidad estética."/>
 </head>
@@ -210,6 +210,7 @@
             <button type="button" id="floating-button-x" class="col btn btn-dark rounded-circle shadow-lg"><i class="bi bi-x-lg" style="font-size: 1.5rem;"></i></button>
             <button type="button" id="floating-button-next" class="col btn btn-dark rounded-circle shadow-lg"><i class="bi bi-arrow-right" style="font-size: 1.5rem;"></i></button>
     </div>
+
     <script>
     let category = 'destacado';
     let filtro = false;
@@ -217,6 +218,24 @@
     let close;
     let limite = [];
     getGrilla();
+
+    // ================= HABILIDADES TOGGLE ================= //
+    document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("skillsToggle");
+    const aboutSection = document.getElementById("toggle");
+
+        toggle.addEventListener("change", function () {
+            if (toggle.checked) {
+            console.log("Toggle activado");
+            aboutSection.scrollIntoView({ behavior: "smooth" });
+            } else {
+            console.log("Toggle desactivado");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    });
+
+    // ================= SELECTOR DE CATEGORÍAS ================= //
     function parseCategories(categoryString) {
         if (!categoryString) return [];
   
@@ -226,6 +245,7 @@
             .map(cat => cat.trim())
             .filter(cat => cat.length > 0);
     }
+
     function generarSelectorCategorias(data) {
     const seleccionActual = categoryFilter.value || category;
         const categoriasUnicas = new Set();
@@ -243,11 +263,20 @@
         categoryFilter.innerHTML = opcionTodos + opcionesHTML;
         categoryFilter.value = seleccionActual;
     }
+    
     const categoryFilter = document.getElementById('categoryFilter');
-    const btnTodo = document.getElementById('btnTodo');
-    const botoneraTodo = document.getElementById('botoneraTodo');
+    
+    categoryFilter.addEventListener('change', function() {
+        category = this.value;
+        console.log('Categoría seleccionada:', category);
+        filtro = true;
+        limite.splice(0, limite.length);
+        getGrilla();
+    });
+
+    // ================= ARMAR LA GRILLA PROYECTOR ================= //
     function getGrilla() {
-        fetch('post.json?v=1.1')
+        fetch('post.json')
         .then((res) => res.json())
         .then((data) => {
             generarSelectorCategorias(data);
@@ -318,29 +347,39 @@
                 });
         })
     };
-    categoryFilter.addEventListener('change', function() {
-        category = this.value;
-        console.log('Categoría seleccionada:', category);
-        filtro = true;
-        limite.splice(0, limite.length);
-        getGrilla();
-    });
+
+    // ================= PAGINADOR ================= //
+    const btnTodo = document.getElementById('btnTodo');
+    const botoneraTodo = document.getElementById('botoneraTodo');
     const btnPrev = document.getElementById('floating-button-prev');
     const btnX = document.getElementById('floating-button-x');
     const btnNext = document.getElementById('floating-button-next');
+
     btnPrev.addEventListener('click', function() {
         let prevProjectId = limite[openProject - 1];
         getProject(String(prevProjectId));
     });
+
     btnX.addEventListener('click', getClose);
     btnNext.addEventListener('click', function() {
         let nextProjectId = limite[openProject + 1];
         getProject(String(nextProjectId));
     });
+
     btnTodo.addEventListener('click', function() {
         categoryFilter.value = '';
         categoryFilter.dispatchEvent(new Event('change'));
     });
+
+    // dibujamos la url frindly sin perder la navegación por #
+    function drawCleanURL(id) {
+        history.replaceState(null, "", `/proyecto/${id}/index.html`);
+    }
+
+    function resetURLHome() {
+        history.replaceState(null, "", "/");
+    }
+
     function paginador(){
         if (openProject === 0) {
             btnPrev.classList.add('d-none');
@@ -359,16 +398,23 @@
             btnNext.classList.remove('d-none');
         }
     };
+
+    // ================= CARGAR PROYECTO ================= //
     const call = document.getElementById('call');
+
     function getProject(id) {
         openProject = limite.indexOf(Number(id));
-        history.pushState(null, null, `#${id}`);
+        resetURLHome();
+        //history.replaceState(null, "", `/#${id}`);
+        history.pushState(null, "", `#${id}`);
+
         console.log(`el usuario eligió ${close} desde la grilla`);
         fetch('post.json')
         .then((res) => res.json())
         .then((data) => {
             const project = data.find(project => project.id === id);
             if (project) {
+                const ORIGIN = window.location.origin;
                 const proj = document.getElementById('project');
                 const botonera = document.getElementById('floating-button');
                 proj.scrollIntoView({ behavior: "smooth" });
@@ -381,7 +427,9 @@
                 if (project.video != '') {
                     const cantidad = project.cant - project.video;
                         if (img <= cantidad) {
-                        const imgPath = `./img/${project.id}/${img}.jpg`;
+                        const imgPath  = `${ORIGIN}/img/${project.id}/${img}.jpg`;
+                        console.log (`cargo ${imgPath}`);
+                        //    const imgPath = `./img/${project.id}/${img}.jpg`;
                         imgInsert += `<img class="img-fluid pb-4" src="${imgPath}">`;
                         const imagePromise = new Promise((resolve, reject) => {
                             const tempImg = new Image();
@@ -391,8 +439,8 @@
                         });
                         imagePromises.push(imagePromise);
                         } else {
-                        const videoPath = `./img/${project.id}/${img}.mp4`;
-                        const poster = `./img/${project.id}/${img}.jpg`;
+                        const videoPath = `${ORIGIN}/img/${project.id}/${img}.mp4`;
+                        const poster    = `${ORIGIN}/img/${project.id}/${img}.jpg`;
                         imgInsert += `<video class="w-100 pb-4" controls disablePictureInPicture controlsList="nodownload" playsinline poster="${poster}" src="${videoPath}"></video>`;
                         const videoPromise = new Promise((resolve, reject) => {
                             const tempVideo = document.createElement('video');
@@ -403,9 +451,10 @@
                             tempVideo.onerror = () => reject();
                             tempVideo.src = videoPath;
                         });
+                    imagePromises.push(videoPromise); 
                     }
                 } else {
-                    const imgPath = `./img/${project.id}/${img}.jpg`;
+                    const imgPath  = `${ORIGIN}/img/${project.id}/${img}.jpg`;
                     imgInsert += `<img class="img-fluid pb-4" src="${imgPath}">`;
                     const imagePromise = new Promise((resolve, reject) => {
                     const tempImg = new Image();
@@ -484,12 +533,16 @@
                 detenerIntervalo();
                 activo = false;
                 });
+
+            drawCleanURL(id);
             }
         })
         .catch(error => {
         console.error("Error al cargar los datos:", error);
         });
     };
+
+    // ================= MANEJAR EL CAMBIO DE # ================= //
     function handleHashChange() {
     const hash = window.location.hash;
         if (hash) {
@@ -500,8 +553,11 @@
             }
         }
     };
+
+    // ================= CERRAR PROYECTO ================= //
     function getClose(){
-        history.pushState(null, null, window.location.pathname);
+        history.replaceState(null, "", "/");
+        location.hash = ""; // opcional: limpia #18 si quedó
         document.getElementById('project').replaceChildren();   
         document.getElementById('floating-button').classList.remove('d-block');
         document.getElementById('floating-button').classList.add('d-none');
@@ -519,10 +575,14 @@
             document.body.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
+
+    // ================= PRIMERA CARGA HTML ================= //
     document.addEventListener('DOMContentLoaded', function() {
         handleHashChange();
         window.addEventListener('hashchange', handleHashChange);
     });
+
+    // ================= FONDO COLORES ================= //
     const colores = [
     "#F39C12", "#2ECC71", "#1188F2", "#9B59B6", "#F25E11",
     "#F2D211", "#B38439", "#959595"
@@ -559,20 +619,7 @@
         }
         activo = !activo;
     });
-    document.addEventListener("DOMContentLoaded", function () {
-    const toggle = document.getElementById("skillsToggle");
-    const aboutSection = document.getElementById("toggle");
 
-        toggle.addEventListener("change", function () {
-            if (toggle.checked) {
-            console.log("Toggle activado");
-            aboutSection.scrollIntoView({ behavior: "smooth" });
-            } else {
-            console.log("Toggle desactivado");
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-        });
-    });
    </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
