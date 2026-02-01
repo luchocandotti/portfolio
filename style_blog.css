@@ -24,8 +24,8 @@ a {
     }
 }
 
-p {
-    font-weight: 300;
+p, ul li {
+  font-weight: 300;
 }
 .nav-custom{
     background-color: #000000eb;
