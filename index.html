@@ -307,7 +307,7 @@
 
     // ================= ARMAR LA GRILLA PROYECTOR ================= //
     function getGrilla() {
-        fetch('post.json')
+        fetch('post.json', { cache: 'reload' })
         .then((res) => res.json())
         .then((data) => {
             generarSelectorCategorias(data);
@@ -440,7 +440,7 @@
         history.pushState(null, "", `#${id}`);
 
         console.log(`el usuario eligió ${close} desde la grilla`);
-        fetch('post.json')
+        fetch('post.json', { cache: 'reload' })
         .then((res) => res.json())
         .then((data) => {
             const project = data.find(project => project.id === id);
