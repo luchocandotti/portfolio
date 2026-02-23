@@ -442,7 +442,7 @@
         console.log(`el usuario eligió ${close} desde la grilla`);
         fetch('post.json', { cache: 'reload' })
         .then((res) => res.json())
-        .then((data) => {
+        .then((data) => {      
             const project = data.find(project => project.id === id);
             if (project) {
                 const ORIGIN = window.location.origin;
