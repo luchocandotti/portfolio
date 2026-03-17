@@ -1,24 +1,20 @@
 <?php
-// Archivo donde se guarda el número
 $archivo = 'numero.txt';
 
-// Si es una petición GET, devolver el número actual
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (file_exists($archivo)) {
-        echo file_get_contents($archivo);
-    } else {
-        echo '000';
-    }
-    exit;
+// Si no existe, lo crea en 0
+if (!file_exists($archivo)) {
+    file_put_contents($archivo, '0');
 }
 
-// Si es una petición POST, guardar el nuevo número
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $numero = $_POST['numero'] ?? '000';
-    // Validar que sea solo números
-    $numero = preg_replace('/[^0-9]/', '', $numero);
-    file_put_contents($archivo, $numero);
-    echo $numero;
-    exit;
-}
+// Leer número actual
+$numeroActual = (int) file_get_contents($archivo);
+
+// Sumar 1
+$nuevoNumero = $numeroActual + 1;
+
+// Guardar
+file_put_contents($archivo, (string)$nuevoNumero);
+
+// Devolver número actualizado
+echo $nuevoNumero;
 ?>
