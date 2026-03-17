@@ -79,6 +79,7 @@ section.txt-continua.row {
     .separador {
         display: none;
         margin: 0;
+        height: 0;
     }
 }
 
