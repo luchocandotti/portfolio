@@ -10,9 +10,17 @@ html, body {
     background-color: #000;
 }
 body{
-    padding-top: 30px;
+    padding-top: 70px; /* altura del navbar fijo: evita que el contenido quede tapado */
     font-family: "Albert Sans", sans-serif;
     font-size: 14px;
+}
+
+#blog .container > h1:first-child {
+    padding-top: 30px;
+}
+
+.container {
+    padding: 0;
 }
 
 
@@ -27,8 +35,19 @@ a {
 p, ul li {
   font-weight: 300;
 }
+
+.lh-blog {
+  line-height: 1.6;
+}
+
 .nav-custom{
-    background-color: #000000eb;
+    background-color: #000000;
+}
+
+.w-10 {
+  width: 10%;
+  border-top-width: 0.1px !important;
+  opacity: 40%;
 }
 
 .cursor {
@@ -36,6 +55,16 @@ p, ul li {
     animation-duration: 1s;
     animation-iteration-count: infinite;
 }
+
+section.txt-continua.row {
+  align-items: flex-start;
+}
+
+.txt-continua > div[class*="col-"] > p:last-of-type {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 @keyframes anim {
     0% {opacity: 0;}
     50% {opacity: 1;}
@@ -46,6 +75,10 @@ p, ul li {
 @media(max-width:576px) {
     .container {
         padding: 0 40px 0 40px;
+    }
+    .separador {
+        display: none;
+        margin: 0;
     }
 }
 
