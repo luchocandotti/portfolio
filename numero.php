@@ -1,11 +1,4 @@
 <?php
-session_start();
-
-// Verificar que esté logueado
-if (!isset($_SESSION['logueado'])) {
-    die('No autorizado');
-}
-
 // Archivo donde se guarda el número
 $archivo = 'numero.txt';
 
