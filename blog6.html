@@ -242,9 +242,12 @@
         })
 
         fetch('numero.php')
-            .then(res => res.text())
-            .then(num => {
-                document.getElementById('contador').textContent = num + '  personas lo leyeron'
+        .then(res => res.text())
+        .then(num => {
+            document.getElementById('contador').textContent = num + ' personas lo leyeron'
+        })
+        .catch(err => {
+            console.error('Error contador:', err)
         })
     </script>
 
