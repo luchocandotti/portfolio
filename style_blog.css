@@ -32,6 +32,10 @@ a {
     }
 }
 
+.blogLink {
+    text-decoration: underline;
+}
+
 p, ul li {
   font-weight: 300;
 }
